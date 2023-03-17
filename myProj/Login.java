@@ -50,7 +50,6 @@ public class Login extends JFrame
             emailLabel.setLocation(150, 110);
 
             // Password Field
-            
             JLabel passwordLabel=new JLabel("Senha: ");
             JPasswordField passwordInput=new JPasswordField();
 
@@ -62,12 +61,30 @@ public class Login extends JFrame
             passwordLabel.setSize(300, 30);
             passwordLabel.setLocation(150, 180);
 
+            // RadioButton (Psichologist or pacient)
+            JRadioButton psicho = new JRadioButton("Psicólogo");
+            JRadioButton pacient = new JRadioButton("Paciente");
+
+            psicho.setFont(new Font("Arial", Font.PLAIN, 12));
+            psicho.setSelected(true);
+            psicho.setSize(75, 20);
+            psicho.setLocation(150, 250);
+
+            pacient.setFont(new Font("Arial", Font.PLAIN, 12));
+            pacient.setSelected(false);
+            pacient.setSize(75, 20);
+            pacient.setLocation(240, 250);
+
+            ButtonGroup group = new ButtonGroup();
+            group.add(psicho);
+            group.add(pacient);
+
             // Submit Button
             JButton submit = new JButton("Confirmar");
 
             submit.setFont(new Font("Arial", Font.PLAIN, 15));
             submit.setSize(150, 30);
-            submit.setLocation(225, 280);
+            submit.setLocation(225, 300);
 
             //Adding Item into panel
 
@@ -76,13 +93,15 @@ public class Login extends JFrame
             c.add(emailInput);
             c.add(passwordLabel);
             c.add(passwordInput);
+            c.add(pacient);
+            c.add(psicho);
             c.add(submit);
 
             add(jPanel);
         }
         else
         {
-            setTitle("Login");
+            setTitle("Registro");
             setBounds(650, 200, 600, 400);
             setResizable(false);
 
