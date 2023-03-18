@@ -83,7 +83,7 @@ class MyFrame implements ActionListener
         
         c.add(register);
 
-        register = new JButton("Sou paciente");
+        register = new JButton("Sou Paciente");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
         register.setSize(135, 30);
         register.setLocation(310, 230);
