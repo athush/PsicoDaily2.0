@@ -49,7 +49,6 @@ class MyFrame implements ActionListener
             public void actionPerformed(ActionEvent actionEvent) 
             {
                 Login login_window = new Login(1, window);
-                login_window.setVisible(true);
                 
                 window.setVisible(false);
             }
@@ -75,7 +74,6 @@ class MyFrame implements ActionListener
             public void actionPerformed(ActionEvent actionEvent) 
             {
                 Login login_window = new Login(2, window);
-                login_window.setVisible(true);
                 
                 window.setVisible(false);
             }
@@ -94,7 +92,6 @@ class MyFrame implements ActionListener
             public void actionPerformed(ActionEvent actionEvent) 
             {
                 Login login_window = new Login(3, window);
-                login_window.setVisible(true);
                 
                 window.setVisible(false);
             }
@@ -120,48 +117,48 @@ class MyFrame implements ActionListener
 
         // Menus teste
 
-        JLabel teste = new JLabel("Menus (teste)");
-		teste.setFont(new Font("Arial", Font.BOLD, 12));
-		teste.setSize(600, 60);
-		teste.setLocation(35, 100);
+        // JLabel teste = new JLabel("Menus (teste)");
+		// teste.setFont(new Font("Arial", Font.BOLD, 12));
+		// teste.setSize(600, 60);
+		// teste.setLocation(35, 100);
 
-        JButton menuPsico = new JButton("Psicólogo");
-        menuPsico.setFont(new Font("Arial", Font.PLAIN, 12));
-        menuPsico.setSize(100, 30);
-        menuPsico.setLocation(25, 150);
+        // JButton menuPsico = new JButton("Psicólogo");
+        // menuPsico.setFont(new Font("Arial", Font.PLAIN, 12));
+        // menuPsico.setSize(100, 30);
+        // menuPsico.setLocation(25, 150);
 
-        JButton menuPac = new JButton("Paciente");
-        menuPac.setFont(new Font("Arial", Font.PLAIN, 12));
-        menuPac.setSize(100, 30);
-        menuPac.setLocation(25, 190);
+        // JButton menuPac = new JButton("Paciente");
+        // menuPac.setFont(new Font("Arial", Font.PLAIN, 12));
+        // menuPac.setSize(100, 30);
+        // menuPac.setLocation(25, 190);
 
-        menuPsico.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) 
-            {
-                Menu menu_window = new Menu(1, window);
-                menu_window.setVisible(true);
+        // menuPsico.addActionListener(new ActionListener() 
+        // {
+        //     @Override
+        //     public void actionPerformed(ActionEvent actionEvent) 
+        //     {
+        //         Menu menu_window = new Menu(1, window);
+        //         menu_window.setVisible(true);
                 
-                window.setVisible(false);
-            }
-        });
+        //         window.setVisible(false);
+        //     }
+        // });
 
-        menuPac.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) 
-            {
-                Menu menu_window = new Menu(2, window);
-                menu_window.setVisible(true);
+        // menuPac.addActionListener(new ActionListener() 
+        // {
+        //     @Override
+        //     public void actionPerformed(ActionEvent actionEvent) 
+        //     {
+        //         Menu menu_window = new Menu(2, window);
+        //         menu_window.setVisible(true);
                 
-                window.setVisible(false);
-            }
-        });
+        //         window.setVisible(false);
+        //     }
+        // });
         
-		c.add(teste);
-        c.add(menuPsico);
-        c.add(menuPac);
+		// c.add(teste);
+        // c.add(menuPsico);
+        // c.add(menuPac);
 
 		window.setVisible(true);
 	}

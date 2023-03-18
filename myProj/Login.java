@@ -3,29 +3,31 @@ package myProj;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.Arrays;
 
-public class Login extends JFrame
+public class Login
 {
     public Boolean isClosed = false;
+    JFrame window = new JFrame();
     
     public Login(int type, JFrame main_window) 
     {
-        addWindowListener(new WindowAdapter() 
+        window.addWindowListener(new WindowAdapter() 
         {
             public void windowClosing(WindowEvent windowEvent)
             {
-               dispose();
+               window.dispose();
                main_window.setVisible(true);
             }        
         }); 
         
         if (type == 1)
         {
-            setTitle("Login");
-            setBounds(650, 200, 600, 400);
-            setResizable(false);
+            window.setTitle("Login");
+            window.setBounds(650, 200, 600, 400);
+            window.setResizable(false);
 
-            Container c = getContentPane();
+            Container c = window.getContentPane();
             c.setLayout(null);
 
             //Adding Panel With Layout in Default Window
@@ -86,6 +88,46 @@ public class Login extends JFrame
             submit.setSize(150, 30);
             submit.setLocation(225, 300);
 
+            submit.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) 
+                {
+                    String email = emailInput.getText();
+                    char[] password = passwordInput.getPassword();
+
+                    if (psicho.isSelected())
+                    {
+                        Database db = new Database();
+                        Psic found = db.get_psic(email);
+
+                        if (found != null)
+                        {
+                            Boolean compare = Arrays.equals(password, found.password);
+
+                            if (compare)
+                            {
+                                Menu menu = new Menu(1, main_window, found);
+                                window.dispose();
+                                menu.setVisible(true);
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                            }
+                        }
+                        else 
+                        {
+                            JOptionPane.showMessageDialog(null, "Usuário não existe!");
+                        }
+                    }
+                    else if (pacient.isSelected())
+                    {
+                        // ainda não foi criado
+                    }
+                }
+            });
+
             //Adding Item into panel
 
             c.add(main_label);
@@ -97,15 +139,16 @@ public class Login extends JFrame
             c.add(psicho);
             c.add(submit);
 
-            add(jPanel);
+            window.add(jPanel);
+            window.setVisible(true);
         }
         else if (type == 2)
         {
-            setTitle("Registro");
-            setBounds(650, 200, 600, 520);
-            setResizable(false);
+            window.setTitle("Registro");
+            window.setBounds(650, 200, 600, 520);
+            window.setResizable(false);
 
-            Container c = getContentPane();
+            Container c = window.getContentPane();
             c.setLayout(null);
 
             //Adding Panel With Layout in Default Window
@@ -202,7 +245,7 @@ public class Login extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    dispose();
+                    window.dispose();
                     main_window.setVisible(true);
                 }
             });
@@ -223,15 +266,16 @@ public class Login extends JFrame
             c.add(submit);
             c.add(returnButton);
 
-            add(jPanel);
+            window.add(jPanel);
+            window.setVisible(true);
         }
         else if (type == 3)
         {
-            setTitle("Registro");
-            setBounds(650, 200, 600, 450);
-            setResizable(false);
+            window.setTitle("Registro");
+            window.setBounds(650, 200, 600, 450);
+            window.setResizable(false);
 
-            Container c = getContentPane();
+            Container c = window.getContentPane();
             c.setLayout(null);
 
             //Adding Panel With Layout in Default Window
@@ -315,7 +359,7 @@ public class Login extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    dispose();
+                    window.dispose();
                     main_window.setVisible(true);
                 }
             });
@@ -334,7 +378,8 @@ public class Login extends JFrame
             c.add(submit);
             c.add(returnButton);
 
-            add(jPanel);
+            window.add(jPanel);
+            window.setVisible(true);
         }
     }
 }

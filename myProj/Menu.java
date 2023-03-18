@@ -8,7 +8,7 @@ public class Menu extends JFrame
 {
     public boolean isClosed = false;
 
-    public Menu(int type, JFrame main_window) 
+    public Menu(int type, JFrame main_window, Psic psic) 
     {
         addWindowListener(new WindowAdapter() 
         {
@@ -47,13 +47,13 @@ public class Menu extends JFrame
 
             // Nome
 
-            JLabel nomePsico = new JLabel("Nome: \n");
+            JLabel nomePsico = new JLabel("Nome: " + psic.name + "\n");
             nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
             nomePsico.setSize(600, 30);
             nomePsico.setLocation(15, 90);
             c.add(nomePsico);
 
-            JLabel crpPsico = new JLabel("CRP: \n");
+            JLabel crpPsico = new JLabel("CRP: "+ psic.crp + "\n");
             crpPsico.setFont(new Font("Arial", Font.PLAIN, 15));
             crpPsico.setSize(600, 30);
             crpPsico.setLocation(15, 115);
