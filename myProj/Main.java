@@ -57,10 +57,17 @@ class MyFrame implements ActionListener
 
         c.add(login);
 
-        register = new JButton("Novo usuário");
+        JLabel registerLabel = new JLabel("Ainda não tem conta?");
+        registerLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+        registerLabel.setSize(300, 30);
+        registerLabel.setLocation(225, 200);
+
+        c.add(registerLabel);
+
+        register = new JButton("Sou Psicólogo");
         register.setFont(new Font("Arial", Font.PLAIN, 15));
-        register.setSize(300, 30);
-        register.setLocation(150, 190);
+        register.setSize(140, 30);
+        register.setLocation(155, 230);
         
         register.addActionListener(new ActionListener() 
         {
@@ -76,10 +83,29 @@ class MyFrame implements ActionListener
         
         c.add(register);
 
+        register = new JButton("Sou paciente");
+        register.setFont(new Font("Arial", Font.PLAIN, 15));
+        register.setSize(135, 30);
+        register.setLocation(310, 230);
+        
+        register.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) 
+            {
+                Login login_window = new Login(3, window);
+                login_window.setVisible(true);
+                
+                window.setVisible(false);
+            }
+        });
+        
+        c.add(register);
+
         sair = new JButton("Sair");
         sair.setFont(new Font("Arial", Font.PLAIN, 15));
         sair.setSize(300, 30);
-        sair.setLocation(150, 230);
+        sair.setLocation(150, 300);
         
         sair.addActionListener(new ActionListener() 
         {
@@ -91,6 +117,51 @@ class MyFrame implements ActionListener
         });
         
         c.add(sair);
+
+        // Menus teste
+
+        JLabel teste = new JLabel("Menus (teste)");
+		teste.setFont(new Font("Arial", Font.BOLD, 12));
+		teste.setSize(600, 60);
+		teste.setLocation(35, 100);
+
+        JButton menuPsico = new JButton("Psicólogo");
+        menuPsico.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuPsico.setSize(100, 30);
+        menuPsico.setLocation(25, 150);
+
+        JButton menuPac = new JButton("Paciente");
+        menuPac.setFont(new Font("Arial", Font.PLAIN, 12));
+        menuPac.setSize(100, 30);
+        menuPac.setLocation(25, 190);
+
+        menuPsico.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) 
+            {
+                Menu menu_window = new Menu(1, window);
+                menu_window.setVisible(true);
+                
+                window.setVisible(false);
+            }
+        });
+
+        menuPac.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) 
+            {
+                Menu menu_window = new Menu(2, window);
+                menu_window.setVisible(true);
+                
+                window.setVisible(false);
+            }
+        });
+        
+		c.add(teste);
+        c.add(menuPsico);
+        c.add(menuPac);
 
 		window.setVisible(true);
 	}
