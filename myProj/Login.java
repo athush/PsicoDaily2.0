@@ -107,7 +107,7 @@ public class Login
 
                             if (compare)
                             {
-                                Menu menu = new Menu(1, main_window, found);
+                                Menu menu = new Menu(1, main_window, found, null);
                                 window.dispose();
                                 menu.setVisible(true);
                             }
@@ -123,7 +123,28 @@ public class Login
                     }
                     else if (pacient.isSelected())
                     {
-                        // ainda não foi criado
+                        Database db = new Database();
+                        Patient found = db.get_patient(email);
+
+                        if (found != null)
+                        {
+                            Boolean compare = Arrays.equals(password, found.password);
+
+                            if (compare)
+                            {
+                                Menu menu = new Menu(2, main_window, null, found);
+                                window.dispose();
+                                menu.setVisible(true);
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                            }
+                        }
+                        else 
+                        {
+                            JOptionPane.showMessageDialog(null, "Usuário não existe!");
+                        }
                     }
                 }
             });

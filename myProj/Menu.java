@@ -8,7 +8,7 @@ public class Menu extends JFrame
 {
     public boolean isClosed = false;
 
-    public Menu(int type, JFrame main_window, Psic psic) 
+    public Menu(int type, JFrame main_window, Psic psic, Patient patient) 
     {
         addWindowListener(new WindowAdapter() 
         {
@@ -133,15 +133,15 @@ public class Menu extends JFrame
 
             // Name
 
-            JLabel nomePsico = new JLabel("Nome: \n");
+            JLabel nomePsico = new JLabel("Nome: " + patient.name + "\n");
             nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
             nomePsico.setSize(600, 30);
             nomePsico.setLocation(15, 90);
             c.add(nomePsico);
 
-            // Psychologis name
+            // Psychologist name
 
-            JLabel psicoName = new JLabel("Psicólogo: \n");
+            JLabel psicoName = new JLabel("Psicólogo:\n");
             psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
             psicoName.setSize(600, 30);
             psicoName.setLocation(15, 115);
