@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.UUID;
 
 class MyFrame implements ActionListener 
 {
@@ -20,6 +21,8 @@ class MyFrame implements ActionListener
 
 	public MyFrame()
 	{
+        Database db = new Database();
+        
 		window = new JFrame();
         
         window.setTitle("Home");
@@ -48,7 +51,7 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(1, window);
+                Login login_window = new Login(1, window, db);
                 
                 window.setVisible(false);
             }
@@ -73,7 +76,7 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(2, window);
+                Login login_window = new Login(2, window, db);
                 
                 window.setVisible(false);
             }
@@ -91,7 +94,7 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(3, window);
+                Login login_window = new Login(3, window, db);
                 
                 window.setVisible(false);
             }

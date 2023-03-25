@@ -10,7 +10,7 @@ public class Login
     public Boolean isClosed = false;
     JFrame window = new JFrame();
     
-    public Login(int type, JFrame main_window) 
+    public Login(int type, JFrame main_window, Database db) 
     {
         window.addWindowListener(new WindowAdapter() 
         {
@@ -98,7 +98,6 @@ public class Login
 
                     if (psicho.isSelected())
                     {
-                        Database db = new Database();
                         Psic found = db.get_psic(email);
 
                         if (found != null)
@@ -107,7 +106,7 @@ public class Login
 
                             if (compare)
                             {
-                                Menu menu = new Menu(1, main_window, found, null);
+                                Menu menu = new Menu(1, main_window, found, null, db);
                                 window.dispose();
                                 menu.setVisible(true);
                             }
@@ -123,7 +122,6 @@ public class Login
                     }
                     else if (pacient.isSelected())
                     {
-                        Database db = new Database();
                         Patient found = db.get_patient(email);
 
                         if (found != null)
@@ -132,7 +130,7 @@ public class Login
 
                             if (compare)
                             {
-                                Menu menu = new Menu(2, main_window, null, found);
+                                Menu menu = new Menu(2, main_window, null, found, db);
                                 window.dispose();
                                 menu.setVisible(true);
                             }

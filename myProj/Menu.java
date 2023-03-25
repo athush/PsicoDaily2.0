@@ -8,7 +8,7 @@ public class Menu extends JFrame
 {
     public boolean isClosed = false;
 
-    public Menu(int type, JFrame main_window, Psic psic, Patient patient) 
+    public Menu(int type, JFrame main_window, Psic psic, Patient patient, Database db) 
     {
         addWindowListener(new WindowAdapter() 
         {
@@ -154,6 +154,17 @@ public class Menu extends JFrame
             exibirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             exibirRegistros.setSize(175, 30);
             exibirRegistros.setLocation(225, 300);
+
+            exibirRegistros.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) 
+                {
+                    RecordWindow new_window = new RecordWindow(2, db);
+                    dispose();
+                }
+            });
+
             c.add(exibirRegistros);
 
             // Show pacient records
