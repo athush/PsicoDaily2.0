@@ -1,21 +1,19 @@
 package myProj;
 
-import java.util.UUID;
-
 public class Record
 {
     String recordTitle;
     String recordText;
-    UUID recordId;
+    int recordId;
 
-    public Record(String title, String text)
+    public Record(String title, String text, int id)
     {
-        this.recordId = UUID.randomUUID();
+        this.recordId = id;
         this.recordTitle = title;
         this.recordText = text;
     }
 
-    public UUID getId() {
+    public int getId() {
         return this.recordId;
     }
 

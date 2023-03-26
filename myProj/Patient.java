@@ -15,12 +15,21 @@ public class Patient extends User
         this.psic_id = "null";
     }
 
-    public boolean addRecord(String title, String text)
+    public boolean addRecord(String title, String text, int id)
     {
-        Record newRecord = new Record(title, text);
+        Record newRecord = new Record(title, text, id);
 
         return records.add(newRecord);
     }
+
+    public boolean editRecord(String title, String text, int id)
+    {
+        Record newRecord = new Record(title, text, id);
+
+        records.set(id - 1, newRecord);
+        return true;
+    }
+
 
     @Override
     public void profile() 

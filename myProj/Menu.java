@@ -4,28 +4,29 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class Menu extends JFrame 
+public class Menu
 {
     public boolean isClosed = false;
+    JFrame window = new JFrame();
 
     public Menu(int type, JFrame main_window, Psic psic, Patient patient, Database db) 
     {
-        addWindowListener(new WindowAdapter() 
+        window.addWindowListener(new WindowAdapter() 
         {
             public void windowClosing(WindowEvent windowEvent)
             {
-               dispose();
+               window.dispose();
                main_window.setVisible(true);
             }        
-        });
+        }); 
 
         if (type == 1)              // Psicologo
         {
-            setTitle("Menu Psicologo");
-            setBounds(640, 200, 640, 400);
-            setResizable(false);
+            window.setTitle("Menu Psicologo");
+            window.setBounds(640, 200, 640, 400);
+            window.setResizable(false);
 
-            Container c = getContentPane();
+            Container c = window.getContentPane();
             c.setLayout(null);
 
             //Adding Panel With Layout in Default Window
@@ -97,21 +98,21 @@ public class Menu extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    dispose();
+                    window.dispose();
                     main_window.setVisible(true);
                 }
             });
 
-
-            add(jPanel);
+            window.add(jPanel);
+            window.setVisible(true);
         }
-        else if (type == 2)         // Paciente
+        else if (type == 2)         // Pacient
         {
-            setTitle("Menu Paciente");
-            setBounds(640, 200, 640, 400);
-            setResizable(false);
+            window.setTitle("Menu Paciente");
+            window.setBounds(640, 200, 640, 400);
+            window.setResizable(false);
 
-            Container c = getContentPane();
+            Container c = window.getContentPane();
             c.setLayout(null);
 
             //Adding Panel With Layout in Default Window
@@ -121,14 +122,14 @@ public class Menu extends JFrame
             JLabel main_label = new JLabel("Menu Paciente", JLabel.CENTER);
             main_label.setFont(new Font("Arial", Font.BOLD, 30));
             main_label.setSize(600, 60);
-            main_label.setLocation(10, 10);
+            main_label.setLocation(10, 0);
             c.add(main_label);
 
             // Show pacient profile
             JLabel user_profile = new JLabel("Seu perfil: ");
             user_profile.setFont(new Font("Arial", Font.BOLD, 15));
             user_profile.setSize(600, 30);
-            user_profile.setLocation(15, 60);
+            user_profile.setLocation(300, 75);
             c.add(user_profile);
 
             // Name
@@ -136,7 +137,7 @@ public class Menu extends JFrame
             JLabel nomePsico = new JLabel("Nome: " + patient.name + "\n");
             nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
             nomePsico.setSize(600, 30);
-            nomePsico.setLocation(15, 90);
+            nomePsico.setLocation(300, 100);
             c.add(nomePsico);
 
             // Psychologist name
@@ -144,24 +145,85 @@ public class Menu extends JFrame
             JLabel psicoName = new JLabel("Psicólogo:\n");
             psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
             psicoName.setSize(600, 30);
-            psicoName.setLocation(15, 115);
+            psicoName.setLocation(300, 125);
             c.add(psicoName);
+
+            // Create records
+
+            JButton criarRegistros = new JButton("Novo Registro");
+
+            criarRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
+            criarRegistros.setSize(175, 30);
+            criarRegistros.setLocation(25, 75);
+
+            criarRegistros.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) 
+                {
+                    RecordWindow new_window = new RecordWindow(1, window, patient, 0);
+                    window.dispose();
+                }
+            });
+
+            c.add(criarRegistros);
+
+            // Edit records
+
+            JButton editarRegistros = new JButton("Editar Registro");
+
+            editarRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
+            editarRegistros.setSize(175, 30);
+            editarRegistros.setLocation(25, 120);
+
+            editarRegistros.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) 
+                {
+                    RecordWindow new_window = new RecordWindow(4, window, patient, 0);
+                    window.setVisible(false);
+                }
+            });
+
+            c.add(editarRegistros);
+
+
+            // Delete records
+
+            JButton excluirRegistros = new JButton("Excluir Registro");
+
+            excluirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
+            excluirRegistros.setSize(175, 30);
+            excluirRegistros.setLocation(25, 165);
+
+            excluirRegistros.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) 
+                {
+                    RecordWindow new_window = new RecordWindow(3, window, patient, 0);
+                    window.setVisible(false);
+                }
+            });
+
+            c.add(excluirRegistros);
             
-            // Show pacients
+            // Show records
 
             JButton exibirRegistros = new JButton("Exibir seus registros");
 
             exibirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             exibirRegistros.setSize(175, 30);
-            exibirRegistros.setLocation(225, 300);
+            exibirRegistros.setLocation(25, 210);
 
             exibirRegistros.addActionListener(new ActionListener() 
             {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    RecordWindow new_window = new RecordWindow(2, db);
-                    dispose();
+                    RecordWindow new_window = new RecordWindow(2, window, patient, 0);
+                    window.setVisible(false);
                 }
             });
 
@@ -173,7 +235,7 @@ public class Menu extends JFrame
 
             mostrarConsultas.setFont(new Font("Arial", Font.PLAIN, 15));
             mostrarConsultas.setSize(175, 30);
-            mostrarConsultas.setLocation(425, 300);
+            mostrarConsultas.setLocation(25, 255);
             c.add(mostrarConsultas);
 
             // Log out
@@ -190,13 +252,14 @@ public class Menu extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    dispose();
+                    window.dispose();
                     main_window.setVisible(true);
                 }
             });
 
 
-            add(jPanel);
+            window.add(jPanel);
+            window.setVisible(true);
         }
     }
 

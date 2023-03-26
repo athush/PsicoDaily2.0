@@ -108,7 +108,6 @@ public class Login
                             {
                                 Menu menu = new Menu(1, main_window, found, null, db);
                                 window.dispose();
-                                menu.setVisible(true);
                             }
                             else
                             {
@@ -132,7 +131,6 @@ public class Login
                             {
                                 Menu menu = new Menu(2, main_window, null, found, db);
                                 window.dispose();
-                                menu.setVisible(true);
                             }
                             else
                             {

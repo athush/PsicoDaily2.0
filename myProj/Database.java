@@ -16,8 +16,8 @@ public class Database
     {
         char[] password = {'1', '2', '3'};
     
-        Psic psic = new Psic("1", "Luis", "luis@gmail.com", password, "123.456.789-00", "1002000");
-        Patient patient = new Patient("1", "Eduardo", "eduardo@gmail.com", password, "234.123.567-76"); 
+        Psic psic = new Psic("1", "Luis", "luis", password, "123.456.789-00", "1002000");
+        Patient patient = new Patient("1", "Eduardo", "eduardo", password, "234.123.567-76"); 
         
         database_psic.add(psic);
         database_patient.add(patient);
