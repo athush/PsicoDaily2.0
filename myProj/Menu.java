@@ -60,7 +60,7 @@ public class Menu
             crpPsico.setLocation(15, 115);
             c.add(crpPsico);
 
-            JLabel numPacientes = new JLabel("Quantidade de pacientes: \n");
+            JLabel numPacientes = new JLabel("Quantidade de pacientes: "+psic.patient_list.size()+ "\n");
             numPacientes.setFont(new Font("Arial", Font.PLAIN, 15));
             numPacientes.setSize(600, 30);
             numPacientes.setLocation(15, 140);
@@ -75,6 +75,14 @@ public class Menu
             showPacientes.setLocation(225, 300);
             c.add(showPacientes);
 
+            showPacientes.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psic);
+                    window.setVisible(false);
+                }
+            });
+
             // Show pacient records
 
             JButton showRegistros = new JButton("Exibir registro");
@@ -83,6 +91,23 @@ public class Menu
             showRegistros.setSize(175, 30);
             showRegistros.setLocation(425, 300);
             c.add(showRegistros);
+
+            // Link Patients
+            JButton link_patients = new JButton("Vincular Paciente");
+
+            link_patients.setFont(new Font("Arial", Font.PLAIN, 15));
+            link_patients.setSize(175, 30);
+            link_patients.setLocation(25, 250);
+            
+            link_patients.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    ManagePatientsWindow new_window = new ManagePatientsWindow(2, window, db, psic);
+                    window.setVisible(false);
+                }
+            });
+
+            c.add(link_patients);
 
             // Log out
 
@@ -106,7 +131,7 @@ public class Menu
             window.add(jPanel);
             window.setVisible(true);
         }
-        else if (type == 2)         // Pacient
+        else if (type == 2)         // Patient
         {
             window.setTitle("Menu Paciente");
             window.setBounds(640, 200, 640, 400);
@@ -142,7 +167,7 @@ public class Menu
 
             // Psychologist name
 
-            JLabel psicoName = new JLabel("Psicólogo:\n");
+            JLabel psicoName = new JLabel("Psicólogo: " + db.get_psic(patient.psic_id).name);
             psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
             psicoName.setSize(600, 30);
             psicoName.setLocation(300, 125);

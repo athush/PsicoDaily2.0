@@ -205,10 +205,10 @@ public class Login
             // CPF Label
 
             JLabel cpfLabel=new JLabel("CPF: ");
-            JPasswordField cpfInput=new JPasswordField();
+            JTextField cpfInput=new JTextField();
 
             cpfLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            cpfLabel.setSize(300, 30);
+             cpfLabel.setSize(300, 30);
             cpfLabel.setLocation(150, 200);
 
             cpfInput.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -248,6 +248,23 @@ public class Login
             submit.setFont(new Font("Arial", Font.PLAIN, 15));
             submit.setSize(135, 30);
             submit.setLocation(310, 430);
+
+            submit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent){
+                    String name = nameInput.getText();
+                    String email = emailInput.getText();
+                    String cpf = cpfInput.getText();
+                    String crp = crpInput.getText();
+                    char[] password = passwordInput.getPassword();
+
+                    db.add_psico(name, email, cpf, crp, password);
+                    JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
+                    window.dispose();
+                    main_window.setVisible(true);
+
+                }
+            });
 
             // Return Button
             
@@ -332,7 +349,7 @@ public class Login
             // CPF Label
 
             JLabel cpfLabel=new JLabel("CPF: ");
-            JPasswordField cpfInput=new JPasswordField();
+            JTextField cpfInput=new JTextField();
 
             cpfLabel.setFont(new Font("Arial", Font.PLAIN, 15));
             cpfLabel.setSize(300, 30);
@@ -362,6 +379,22 @@ public class Login
             submit.setFont(new Font("Arial", Font.PLAIN, 15));
             submit.setSize(135, 30);
             submit.setLocation(310, 360);
+
+            submit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    String name = nameInput.getText();
+                    String email = emailInput.getText();
+                    String cpf = cpfInput.getText();
+                    char[] password = passwordInput.getPassword();
+
+                    db.add_patient(name, email, cpf, password);
+                    JOptionPane.showMessageDialog(null, "Paciente Cadastrado!");
+                    window.dispose();
+                    main_window.setVisible(true);
+
+                }
+            });
 
             // Return Button
             

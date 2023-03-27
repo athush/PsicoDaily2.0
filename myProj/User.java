@@ -2,13 +2,13 @@ package myProj;
 
 abstract class User 
 {
-    String id;
+    int id;
     String name;
     String email;
     char[] password;
     String cpf;
 
-    public User(String id, String name, String email, char[] password, String cpf)
+    public User(int id, String name, String email, char[] password, String cpf)
     {
         this.id = id;
         this.name = name;

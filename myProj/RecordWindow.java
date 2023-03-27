@@ -134,7 +134,7 @@ public class RecordWindow
             {
                 String tituloRegistro = patient.records.get(i).getTitle();
                 JLabel tituloLabel = new JLabel("Titulo registro: " + tituloRegistro);
-                tituloLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                tituloLabel.setFont(new Font("Arial", Font.BOLD, 16));
                 tituloLabel.setSize(300, 30);
                 tituloLabel.setLocation(30, altura);
 
@@ -145,7 +145,7 @@ public class RecordWindow
                 textoLabel.setLocation(30, altura + 20);
 
                 int idRegistro = patient.records.get(i).getId();
-                JLabel idLabel = new JLabel("Id do Registro: " + idRegistro);
+                JLabel idLabel = new JLabel("ID do Registro: " + idRegistro);
                 idLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 idLabel.setSize(350, 30);
                 idLabel.setLocation(30, altura + 40);
@@ -343,7 +343,6 @@ public class RecordWindow
                 }
             });
         }
-        
         window.setVisible(true);
 	}    
 }
