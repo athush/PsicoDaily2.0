@@ -166,8 +166,14 @@ public class Menu
             c.add(nomePsico);
 
             // Psychologist name
+            JLabel psicoName = new JLabel();
 
-            JLabel psicoName = new JLabel("Psicólogo: " + db.get_psic(patient.psic_id).name);
+            Psic psic_patient = db.get_psic(patient.psic_id);
+            if(psic_patient != null){
+                psicoName.setText("Psicólogo: " + psic_patient.name);
+            }else{
+                psicoName.setText("Psicólogo: Não vinculado");
+            }
             psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
             psicoName.setSize(600, 30);
             psicoName.setLocation(300, 125);

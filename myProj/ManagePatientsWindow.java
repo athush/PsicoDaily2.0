@@ -66,6 +66,19 @@ public class ManagePatientsWindow
                 id.setSize(350, 30);
                 id.setLocation(30, altura + 40);
 
+                JButton recordsButton = new JButton("Registros");
+                recordsButton.setFont(new Font("Arial", Font.PLAIN, 12));
+                recordsButton.setSize(120, 30);
+                recordsButton.setLocation(320, altura + 10);
+
+                recordsButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        RecordWindow new_window = new RecordWindow(2, window, patient, 0);
+                        window.setVisible(false);
+                    }
+                });
+
                 JButton unlinkButton = new JButton("Desvincular");
                 unlinkButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 unlinkButton.setSize(120, 30);
@@ -73,14 +86,18 @@ public class ManagePatientsWindow
                 unlinkButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent){
-                        psicologo.patient_list.remove(patient);
-                        patient.psic_id = -1;
-                        
-                        ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psicologo);
-                        window.dispose();
+                        int resposta = JOptionPane.showConfirmDialog(null, "Deseja desvincular " + patient.name +"?");
+                        if (resposta == 0){
+                            psicologo.patient_list.remove(patient);
+                            patient.psic_id = -1;
+
+                            window.dispose();
+                            ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psicologo);
+                        }
                     }
                 });
 
+                c.add(recordsButton);
                 c.add(unlinkButton);
                 c.add(name);
                 c.add(email);
@@ -141,6 +158,7 @@ public class ManagePatientsWindow
                         patient.setPsico(psicologo.id);
                         psicologo.addPatient(patient);
 
+                        JOptionPane.showMessageDialog(null, "Paciente "+patient.name+" vinculado." );
                         window.dispose();
                         main_window.setVisible(true);
                     }
