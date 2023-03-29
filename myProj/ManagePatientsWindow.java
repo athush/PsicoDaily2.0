@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
+import java.util.Date;
+import java.text.SimpleDateFormat;  
 
 public class ManagePatientsWindow 
 {
@@ -14,6 +16,7 @@ public class ManagePatientsWindow
     private JLabel title;
     private JLabel record_title_label;
     private JTextField record_title;
+    private JLabel checaConsulta;
     private JTextArea record_body;
     private JButton submitButton;
     private JButton returnButton;
@@ -48,6 +51,9 @@ public class ManagePatientsWindow
             int numPatients = psicologo.patient_list.size();
             int altura = 70;
 
+            checaConsulta = new JLabel("");
+            SimpleDateFormat f = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+
             for(int i = 0; i < numPatients; i++){
                 Patient patient = psicologo.patient_list.get(i);
 
@@ -66,10 +72,51 @@ public class ManagePatientsWindow
                 id.setSize(350, 30);
                 id.setLocation(30, altura + 40);
 
+                JLabel proxConsulta = new JLabel("Proxima consulta: ");
+                proxConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
+                proxConsulta.setSize(350, 30);
+                proxConsulta.setLocation(30, altura + 60);
+
+                Boolean temConsulta = patient.checaConsulta;
+
+                if (!temConsulta)
+                {
+                    checaConsulta = new JLabel("Paciente sem consulta marcada.");
+                    checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
+                    checaConsulta.setSize(350, 30);
+                    checaConsulta.setLocation(160, altura + 60);
+                }
+                else {
+                    Consulta consultaPaciente = db.checa_consulta(patient);
+                    String horarioConsulta = consultaPaciente.inicio.toString();
+                    System.out.println(horarioConsulta);
+                    checaConsulta = new JLabel(horarioConsulta);
+                    checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
+                    checaConsulta.setSize(350, 30);
+                    checaConsulta.setLocation(160, altura + 60);
+                }
+
+                // Marcar consulta
+
+                JButton consultaBotao = new JButton("Marcar consulta");
+                consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
+                consultaBotao.setSize(110, 30);
+                consultaBotao.setLocation(210, altura + 10);
+
+                consultaBotao.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        ConsultasWindow new_window = new ConsultasWindow(1, window, patient, psicologo, db);
+                        window.setVisible(false);
+                    }
+                });
+
+                c.add(consultaBotao);
+
                 JButton recordsButton = new JButton("Registros");
                 recordsButton.setFont(new Font("Arial", Font.PLAIN, 12));
-                recordsButton.setSize(120, 30);
-                recordsButton.setLocation(320, altura + 10);
+                recordsButton.setSize(110, 30);
+                recordsButton.setLocation(330, altura + 10);
 
                 recordsButton.addActionListener(new ActionListener() {
                     @Override
@@ -81,7 +128,7 @@ public class ManagePatientsWindow
 
                 JButton unlinkButton = new JButton("Desvincular");
                 unlinkButton.setFont(new Font("Arial", Font.PLAIN, 12));
-                unlinkButton.setSize(120, 30);
+                unlinkButton.setSize(110, 30);
                 unlinkButton.setLocation(450, altura + 10);
                 unlinkButton.addActionListener(new ActionListener() {
                     @Override
@@ -102,7 +149,9 @@ public class ManagePatientsWindow
                 c.add(name);
                 c.add(email);
                 c.add(id);
-                altura += 70;
+                c.add(proxConsulta);
+                c.add(checaConsulta);
+                altura += 85;
             }
         }
 
@@ -153,8 +202,13 @@ public class ManagePatientsWindow
                     
                     if (patient == null) {
                         JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
-                    } else {
-                        
+                    }
+                    else if (patient.psic_id != -1)
+                    {
+                        JOptionPane.showMessageDialog(null, "Paciente já possui psicólogo.");
+                    }
+                    else 
+                    {
                         patient.setPsico(psicologo.id);
                         psicologo.addPatient(patient);
 

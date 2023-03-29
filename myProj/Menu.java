@@ -179,6 +179,12 @@ public class Menu
             psicoName.setLocation(300, 125);
             c.add(psicoName);
 
+            JLabel idPacLabel = new JLabel("Seu id: " + patient.id + "\n");
+            idPacLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+            idPacLabel.setSize(600, 30);
+            idPacLabel.setLocation(300, 150);
+            c.add(idPacLabel);
+
             // Create records
 
             JButton criarRegistros = new JButton("Novo Registro");

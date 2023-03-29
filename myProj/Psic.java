@@ -12,14 +12,14 @@ public class Psic extends User
         super(id, name, email, password, cpf);
         this.crp = crp;
 
-        addTest();
+        // addTest();
     }
 
-    public void addTest(){
-        Patient new_patient = new Patient(1, "Eduardo", "eduardo", password, "234.123.567-76");
+    // public void addTest(){
+    //     Patient new_patient = new Patient(1, "Eduardo", "eduardo", password, "234.123.567-76");
 
-        patient_list.add(new_patient);
-    }
+    //     patient_list.add(new_patient);
+    // }
 
     public void addPatient(Patient patient){
         patient_list.add(patient);

@@ -170,6 +170,7 @@ public class RecordWindow
                 deleteButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 deleteButton.setSize(80, 30);
                 deleteButton.setLocation(500, altura + 10);
+                
                 deleteButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
