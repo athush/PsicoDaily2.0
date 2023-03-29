@@ -88,9 +88,14 @@ public class ManagePatientsWindow
                 }
                 else {
                     Consulta consultaPaciente = db.checa_consulta(patient);
-                    String horarioConsulta = consultaPaciente.inicio.toString();
-                    System.out.println(horarioConsulta);
-                    checaConsulta = new JLabel(horarioConsulta);
+                    Date horarioConsulta = consultaPaciente.inicio;
+                    String pattern = "HH:mm dd-MM-yyyy";
+                    SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
+                    String horarioConsultaString = dataFormato.format(horarioConsulta);
+
+
+                    System.out.println(horarioConsultaString);
+                    checaConsulta = new JLabel(horarioConsultaString);
                     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
                     checaConsulta.setSize(350, 30);
                     checaConsulta.setLocation(160, altura + 60);
