@@ -154,7 +154,7 @@ public class Menu
             JLabel user_profile = new JLabel("Seu perfil: ");
             user_profile.setFont(new Font("Arial", Font.BOLD, 15));
             user_profile.setSize(600, 30);
-            user_profile.setLocation(300, 75);
+            user_profile.setLocation(30, 75);
             c.add(user_profile);
 
             // Name
@@ -162,7 +162,7 @@ public class Menu
             JLabel nomePsico = new JLabel("Nome: " + patient.name + "\n");
             nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
             nomePsico.setSize(600, 30);
-            nomePsico.setLocation(300, 100);
+            nomePsico.setLocation(30, 100);
             c.add(nomePsico);
 
             // Psychologist name
@@ -176,13 +176,13 @@ public class Menu
             }
             psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
             psicoName.setSize(600, 30);
-            psicoName.setLocation(300, 125);
+            psicoName.setLocation(30, 125);
             c.add(psicoName);
 
             JLabel idPacLabel = new JLabel("Seu id: " + patient.id + "\n");
             idPacLabel.setFont(new Font("Arial", Font.PLAIN, 15));
             idPacLabel.setSize(600, 30);
-            idPacLabel.setLocation(300, 150);
+            idPacLabel.setLocation(30, 150);
             c.add(idPacLabel);
 
             // Create records
@@ -191,7 +191,7 @@ public class Menu
 
             criarRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             criarRegistros.setSize(175, 30);
-            criarRegistros.setLocation(25, 75);
+            criarRegistros.setLocation(415, 300);
 
             criarRegistros.addActionListener(new ActionListener() 
             {
@@ -223,7 +223,7 @@ public class Menu
                 }
             });
 
-            c.add(editarRegistros);
+            //c.add(editarRegistros);
 
 
             // Delete records
@@ -244,7 +244,7 @@ public class Menu
                 }
             });
 
-            c.add(excluirRegistros);
+            //c.add(excluirRegistros);
             
             // Show records
 
@@ -252,7 +252,7 @@ public class Menu
 
             exibirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             exibirRegistros.setSize(175, 30);
-            exibirRegistros.setLocation(25, 210);
+            exibirRegistros.setLocation(220, 300);
 
             exibirRegistros.addActionListener(new ActionListener() 
             {
@@ -273,7 +273,7 @@ public class Menu
             mostrarConsultas.setFont(new Font("Arial", Font.PLAIN, 15));
             mostrarConsultas.setSize(175, 30);
             mostrarConsultas.setLocation(25, 255);
-            c.add(mostrarConsultas);
+            //c.add(mostrarConsultas);
 
             // Log out
 
