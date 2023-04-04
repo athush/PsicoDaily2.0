@@ -148,9 +148,6 @@ public class ManagePatientsWindow
                     c.add(consultaBotao);
                 }
 
-
-                
-
                 JButton recordsButton = new JButton("Registros");
                 recordsButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 recordsButton.setSize(110, 30);
