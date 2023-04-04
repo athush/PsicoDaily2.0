@@ -24,8 +24,7 @@ public class ConsultasWindow {
 			"05", "06", "07", "08",
 			"09", "10", "11", "12" };
 	private String years[]
-		= { "2020", "2021", "2022", "2023",
-			"2024" };
+		= { "2023", "2024", "2025" };
 
 	private String hours[]
 	= { "06", "07", "08", "09", "10",
@@ -63,7 +62,7 @@ public class ConsultasWindow {
         }); 
 
         window.setTitle("Consultas");
-		window.setBounds(300, 90, 600, 600);
+		window.setBounds(650, 200, 600, 400);
 		window.setResizable(false);
 
         Container c = window.getContentPane();
@@ -79,58 +78,58 @@ public class ConsultasWindow {
         dataLabel = new JLabel("Data da consulta", JLabel.CENTER);
 		dataLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		dataLabel.setSize(600, 100);
-		dataLabel.setLocation(0, 180);
+		dataLabel.setLocation(0, 80);
 		c.add(dataLabel);
 
 		date = new JComboBox(dates);
 		date.setFont(new Font("Arial", Font.PLAIN, 15));
 		date.setSize(60, 20);
-		date.setLocation(200, 250);
+		date.setLocation(200, 150);
 		c.add(date);
 		month = new JComboBox(months);
 		month.setFont(new Font("Arial", Font.PLAIN, 15));
 		month.setSize(60, 20);
-		month.setLocation(270, 250);
+		month.setLocation(270, 150);
 		c.add(month);
 		year = new JComboBox(years);
 		year.setFont(new Font("Arial", Font.PLAIN, 15));
 		year.setSize(60, 20);
-		year.setLocation(340, 250);
+		year.setLocation(340, 150);
 		c.add(year);
 
 		JLabel inicioLabel = new JLabel("Horario de inicio: ");
 		inicioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		inicioLabel.setSize(150, 20);
-		inicioLabel.setLocation(110, 300);
+		inicioLabel.setLocation(110, 200);
 		c.add(inicioLabel);
 
 		horasInicio = new JComboBox(hours);
 		horasInicio.setFont(new Font("Arial", Font.PLAIN, 15));
 		horasInicio.setSize(60, 20);
-		horasInicio.setLocation(230, 300);
+		horasInicio.setLocation(230, 200);
 		c.add(horasInicio);
 		minutosInicio = new JComboBox(minutes);
 		minutosInicio.setFont(new Font("Arial", Font.PLAIN, 15));
 		minutosInicio.setSize(60, 20);
-		minutosInicio.setLocation(310, 300);
+		minutosInicio.setLocation(310, 200);
 		c.add(minutosInicio);
 
 		JLabel fimLabel = new JLabel("Horario de fim: ");
 		fimLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		fimLabel.setSize(150, 20);
-		fimLabel.setLocation(110, 340);
+		fimLabel.setLocation(110, 240);
 		c.add(fimLabel);
 
 		horasFim = new JComboBox(hours);
 		horasFim.setFont(new Font("Arial", Font.PLAIN, 15));
 		horasFim.setSize(60, 20);
-		horasFim.setLocation(230, 340);
+		horasFim.setLocation(230, 240);
 		c.add(horasFim);
 
 		minutosFim = new JComboBox(minutes);
 		minutosFim.setFont(new Font("Arial", Font.PLAIN, 15));
 		minutosFim.setSize(60, 20);
-		minutosFim.setLocation(310, 340);
+		minutosFim.setLocation(310, 240);
 		c.add(minutosFim);
 
 		// Retornar
@@ -138,7 +137,7 @@ public class ConsultasWindow {
 		returnButton = new JButton("Cancelar");
 		returnButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		returnButton.setSize(100, 20);
-		returnButton.setLocation(190, 450);
+		returnButton.setLocation(190, 300);
 
         returnButton.addActionListener(new ActionListener() 
             {
@@ -155,7 +154,7 @@ public class ConsultasWindow {
         confirmButton = new JButton("Marcar");
 		confirmButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		confirmButton.setSize(100, 20);
-		confirmButton.setLocation(310, 450);
+		confirmButton.setLocation(310, 300);
 		c.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() 

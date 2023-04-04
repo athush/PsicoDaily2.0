@@ -31,7 +31,7 @@ public class ManagePatientsWindow
             }        
         });
         window.setTitle("Seus Pacientes");
-        window.setBounds(650, 200, 600, 480);
+        window.setBounds(650, 200, 600, 400);
         window.setResizable(false);
         window.setLayout(new BoxLayout(window, BoxLayout.PAGE_AXIS));
 
@@ -51,7 +51,6 @@ public class ManagePatientsWindow
             int altura = 70;
 
             checaConsulta = new JLabel("");
-            SimpleDateFormat f = new SimpleDateFormat("HH:mm dd-MM-yyyy");
 
             for(int i = 0; i < numPatients; i++){
                 Patient patient = psicologo.patient_list.get(i);
@@ -83,12 +82,12 @@ public class ManagePatientsWindow
                     checaConsulta = new JLabel("Paciente sem consulta marcada.");
                     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
                     checaConsulta.setSize(350, 30);
-                    checaConsulta.setLocation(160, altura + 60);
+                    checaConsulta.setLocation(175, altura + 60);
                 }
                 else {
                     Consulta consultaPaciente = db.checa_consulta(patient);
                     Date horarioConsulta = consultaPaciente.inicio;
-                    String pattern = "HH:mm dd-MM-yyyy";
+                    String pattern = "dd/MM/yyyy à's' HH:mm";
                     SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
                     String horarioConsultaString = dataFormato.format(horarioConsulta);
 
@@ -97,12 +96,12 @@ public class ManagePatientsWindow
                     checaConsulta = new JLabel(horarioConsultaString);
                     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
                     checaConsulta.setSize(350, 30);
-                    checaConsulta.setLocation(160, altura + 60);
+                    checaConsulta.setLocation(175, altura + 60);
                 }
 
                 // Marcar consulta
 
-                JButton consultaBotao = new JButton("Marcar consulta");
+                JButton consultaBotao = new JButton("Consulta");
                 consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
                 consultaBotao.setSize(110, 30);
                 consultaBotao.setLocation(210, altura + 10);
@@ -170,19 +169,19 @@ public class ManagePatientsWindow
             JLabel id_edit_label = new JLabel("ID do paciente:", JLabel.CENTER);
             id_edit_label.setFont(new Font("Arial", Font.PLAIN, 20));
             id_edit_label.setSize(300, 30);
-            id_edit_label.setLocation(50, 90);
+            id_edit_label.setLocation(73, 100);
             c.add(id_edit_label);
 
             JTextField id_text_area = new JTextField();
             id_text_area.setFont(new Font("Arial", Font.PLAIN, 20));
             id_text_area.setSize(300, 30);
-            id_text_area.setLocation(150, 200);
+            id_text_area.setLocation(150, 180);
             c.add(id_text_area);
 
             returnButton = new JButton("Cancelar");
             returnButton.setFont(new Font("Arial", Font.PLAIN, 20));
             returnButton.setSize(150, 30);
-            returnButton.setLocation(125, 390);
+            returnButton.setLocation(125, 285);
             c.add(returnButton);
 
             returnButton.addActionListener(new ActionListener() {
@@ -196,7 +195,7 @@ public class ManagePatientsWindow
             submitButton = new JButton("Vincular");
             submitButton.setFont(new Font("Arial", Font.PLAIN, 20));
             submitButton.setSize(150, 30);
-            submitButton.setLocation(325, 390);
+            submitButton.setLocation(325, 285);
 
             submitButton.addActionListener(new ActionListener() {
                 @Override

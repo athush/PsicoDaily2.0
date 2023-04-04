@@ -26,7 +26,7 @@ public class Menu
         {
             Psic psic = (Psic) user;
             window.setTitle("Menu Psicologo");
-            window.setBounds(640, 200, 640, 400);
+            window.setBounds(650, 200, 600, 400);
             window.setResizable(false);
 
             Container c = window.getContentPane();
@@ -81,7 +81,7 @@ public class Menu
             JButton showPacientes = new JButton("Exibir pacientes");
             showPacientes.setFont(new Font("Arial", Font.PLAIN, 15));
             showPacientes.setSize(175, 30);
-            showPacientes.setLocation(225, 300);
+            showPacientes.setLocation(213, 300);
             c.add(showPacientes);
 
             showPacientes.addActionListener(new ActionListener() {
@@ -97,7 +97,7 @@ public class Menu
 
             link_patients.setFont(new Font("Arial", Font.PLAIN, 15));
             link_patients.setSize(175, 30);
-            link_patients.setLocation(425, 300);
+            link_patients.setLocation(408, 300);
             
             link_patients.addActionListener(new ActionListener() {
                 @Override
@@ -116,7 +116,7 @@ public class Menu
 
             logout.setFont(new Font("Arial", Font.PLAIN, 15));
             logout.setSize(175, 30);
-            logout.setLocation(25, 300);
+            logout.setLocation(18, 300);
             c.add(logout);
 
             logout.addActionListener(new ActionListener() 
@@ -136,7 +136,7 @@ public class Menu
         {
             Patient patient = (Patient) user;
             window.setTitle("Menu Paciente");
-            window.setBounds(640, 200, 640, 400);
+            window.setBounds(650, 200, 600, 400);
             window.setResizable(false);
 
             Container c = window.getContentPane();
@@ -193,7 +193,7 @@ public class Menu
 
             JLabel proxConsulta = new JLabel("Proxima consulta: ");
             proxConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
-            proxConsulta.setSize(150, 30);
+            proxConsulta.setSize(165, 30);
             proxConsulta.setLocation(30, 175);
             c.add(proxConsulta);
 
@@ -206,12 +206,12 @@ public class Menu
                 checaConsulta = new JLabel("Consulta não marcada.");
                 checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
                 checaConsulta.setSize(350, 30);
-                checaConsulta.setLocation(175, 175);
+                checaConsulta.setLocation(195, 175);
             }
             else {
                 Consulta consultaPaciente = db.checa_consulta(patient);
                 Date horarioConsulta = consultaPaciente.inicio;
-                String pattern = "HH:mm dd-MM-yyyy";
+                String pattern = "dd/MM/yyyy à's' HH:mm";
                 SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
                 String horarioConsultaString = dataFormato.format(horarioConsulta);
 
@@ -219,7 +219,7 @@ public class Menu
                 checaConsulta = new JLabel(horarioConsultaString);
                 checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
                 checaConsulta.setSize(350, 30);
-                checaConsulta.setLocation(175, 175);
+                checaConsulta.setLocation(195, 175);
             }
 
             c.add(checaConsulta);
@@ -231,7 +231,7 @@ public class Menu
 
             criarRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             criarRegistros.setSize(175, 30);
-            criarRegistros.setLocation(415, 300);
+            criarRegistros.setLocation(408, 300);
 
             criarRegistros.addActionListener(new ActionListener() 
             {
@@ -247,11 +247,11 @@ public class Menu
             
             // Show records
 
-            JButton exibirRegistros = new JButton("Exibir seus registros");
+            JButton exibirRegistros = new JButton("Exibir Registros");
 
             exibirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
             exibirRegistros.setSize(175, 30);
-            exibirRegistros.setLocation(220, 300);
+            exibirRegistros.setLocation(213, 300);
 
             exibirRegistros.addActionListener(new ActionListener() 
             {
@@ -271,7 +271,7 @@ public class Menu
 
             logout.setFont(new Font("Arial", Font.PLAIN, 15));
             logout.setSize(175, 30);
-            logout.setLocation(25, 300);
+            logout.setLocation(18, 300);
             c.add(logout);
 
             logout.addActionListener(new ActionListener() 

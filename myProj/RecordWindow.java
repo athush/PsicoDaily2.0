@@ -31,7 +31,7 @@ public class RecordWindow
         }); 
             
         window.setTitle("Tela de Registros");
-        window.setBounds(650, 200, 600, 480);
+        window.setBounds(650, 200, 640, 400);
         window.setResizable(false);
         
         window.setLayout(new BoxLayout(window,BoxLayout.PAGE_AXIS));
@@ -39,6 +39,7 @@ public class RecordWindow
         c = window.getContentPane();
         c.setLayout(null);            
 
+        //Novo registro
         if (method == 1)
         {
             title = new JLabel("Registros", JLabel.CENTER);
@@ -50,32 +51,32 @@ public class RecordWindow
             record_title_label = new JLabel("Título do registro:");
             record_title_label.setFont(new Font("Arial", Font.PLAIN, 16));
             record_title_label.setSize(300, 30);
-            record_title_label.setLocation(50, 70);
+            record_title_label.setLocation(50, 50);
             c.add(record_title_label);
             
             record_title = new JTextField();
             record_title.setFont(new Font("Arial", Font.PLAIN, 20));
             record_title.setSize(250, 30);
-            record_title.setLocation(50, 100);
+            record_title.setLocation(50, 80);
             c.add(record_title);
 
             record_title_label = new JLabel("Registro:");
             record_title_label.setFont(new Font("Arial", Font.PLAIN, 16));
             record_title_label.setSize(300, 30);
-            record_title_label.setLocation(50, 135);
+            record_title_label.setLocation(50, 115);
             c.add(record_title_label);
             
             record_body = new JTextArea();
             record_body.setFont(new Font("Arial", Font.PLAIN, 20));
-            record_body.setSize(500, 200);
-            record_body.setLocation(50, 170);
+            record_body.setSize(500, 150);
+            record_body.setLocation(50, 150);
             record_body.setLineWrap(true);
             c.add(record_body);
 
             returnButton = new JButton("Cancelar");
             returnButton.setFont(new Font("Arial", Font.PLAIN, 20));
             returnButton.setSize(150, 30);
-            returnButton.setLocation(125, 390);
+            returnButton.setLocation(125, 315);
             c.add(returnButton);
 
             returnButton.addActionListener(new ActionListener() 
@@ -91,7 +92,7 @@ public class RecordWindow
             submitButton = new JButton("Registrar");
             submitButton.setFont(new Font("Arial", Font.PLAIN, 20));
             submitButton.setSize(150, 30);
-            submitButton.setLocation(325, 390);
+            submitButton.setLocation(325, 315);
             c.add(submitButton);
 
             submitButton.addActionListener(new ActionListener() 
@@ -118,7 +119,7 @@ public class RecordWindow
                 }
             });
         }
-        else if (method == 2)
+        else if (method == 2) //Exibir registros
         {
             title = new JLabel("Registros", JLabel.CENTER);
             title.setFont(new Font("Arial", Font.BOLD, 30));
@@ -191,7 +192,7 @@ public class RecordWindow
                 altura += 70;
             }
         }
-        else if (method == 3)       // Excluir
+        else if (method == 3)       // Excluir registro
         {
             title = new JLabel("Registros", JLabel.CENTER);
             title.setFont(new Font("Arial", Font.BOLD, 30));
@@ -233,69 +234,69 @@ public class RecordWindow
             returnButton.setLocation(325, 390);
             c.add(returnButton);
         }
-        else if (method == 4)       // Editar
-        {
-            title = new JLabel("Registros", JLabel.CENTER);
-            title.setFont(new Font("Arial", Font.BOLD, 30));
-            title.setSize(600, 60);
-            title.setLocation(0, 10);
-            c.add(title);
+        // else if (method == 4)       // Editar registro
+        // {
+        //     title = new JLabel("Registros", JLabel.CENTER);
+        //     title.setFont(new Font("Arial", Font.BOLD, 30));
+        //     title.setSize(600, 60);
+        //     title.setLocation(0, 10);
+        //     c.add(title);
 
-            JLabel id_edit_label = new JLabel("Id do registro para editar:", JLabel.CENTER);
-            id_edit_label.setFont(new Font("Arial", Font.PLAIN, 20));
-            id_edit_label.setSize(300, 30);
-            id_edit_label.setLocation(50, 90);
-            c.add(id_edit_label);
+        //     JLabel id_edit_label = new JLabel("Id do registro para editar:", JLabel.CENTER);
+        //     id_edit_label.setFont(new Font("Arial", Font.PLAIN, 20));
+        //     id_edit_label.setSize(300, 30);
+        //     id_edit_label.setLocation(50, 90);
+        //     c.add(id_edit_label);
             
-            JTextField id_text_area = new JTextField();
-            id_text_area.setFont(new Font("Arial", Font.PLAIN, 20));
-            id_text_area.setSize(300, 30);
-            id_text_area.setLocation(150, 200);
-            c.add(id_text_area);
+        //     JTextField id_text_area = new JTextField();
+        //     id_text_area.setFont(new Font("Arial", Font.PLAIN, 20));
+        //     id_text_area.setSize(300, 30);
+        //     id_text_area.setLocation(150, 200);
+        //     c.add(id_text_area);
 
-            returnButton = new JButton("Cancelar");
-            returnButton.setFont(new Font("Arial", Font.PLAIN, 20));
-            returnButton.setSize(150, 30);
-            returnButton.setLocation(125, 390);
-            c.add(returnButton);
+        //     returnButton = new JButton("Cancelar");
+        //     returnButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        //     returnButton.setSize(150, 30);
+        //     returnButton.setLocation(125, 390);
+        //     c.add(returnButton);
 
-			returnButton.addActionListener(new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) 
-                {
-                    window.dispose();
-                    main_window.setVisible(true);
-                }
-            });
+		// 	returnButton.addActionListener(new ActionListener() 
+        //     {
+        //         @Override
+        //         public void actionPerformed(ActionEvent actionEvent) 
+        //         {
+        //             window.dispose();
+        //             main_window.setVisible(true);
+        //         }
+        //     });
 
-            submitButton = new JButton("Editar");
-            submitButton.setFont(new Font("Arial", Font.PLAIN, 20));
-            submitButton.setSize(150, 30);
-            submitButton.setLocation(325, 390);
+        //     submitButton = new JButton("Editar");
+        //     submitButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        //     submitButton.setSize(150, 30);
+        //     submitButton.setLocation(325, 390);
 
-            submitButton.addActionListener(new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) 
-                {
-                    int idDigitado = Integer.parseInt(id_text_area.getText());
-                    if (idDigitado > patient.records.size() || idDigitado == 0)
-                    {
+        //     submitButton.addActionListener(new ActionListener() 
+        //     {
+        //         @Override
+        //         public void actionPerformed(ActionEvent actionEvent) 
+        //         {
+        //             int idDigitado = Integer.parseInt(id_text_area.getText());
+        //             if (idDigitado > patient.records.size() || idDigitado == 0)
+        //             {
                         
-                        JOptionPane.showMessageDialog(null, "Registro não encontrado.");
-                    }
-                    else
-                    {
-                        window.dispose();
-                        RecordWindow new_window = new RecordWindow(5, main_window, patient, idDigitado);
-                    }
-                }
-            });
+        //                 JOptionPane.showMessageDialog(null, "Registro não encontrado.");
+        //             }
+        //             else
+        //             {
+        //                 window.dispose();
+        //                 RecordWindow new_window = new RecordWindow(5, main_window, patient, idDigitado);
+        //             }
+        //         }
+        //     });
 
-            c.add(submitButton);
-        }
-        else if (method == 5)   // Editar tela
+        //     c.add(submitButton);
+        // }
+        else if (method == 5)   // Editar Registro tela
         {
             title = new JLabel("Editar Registro", JLabel.CENTER);
             title.setFont(new Font("Arial", Font.BOLD, 30));
@@ -306,13 +307,13 @@ public class RecordWindow
             record_title_label = new JLabel("Título do registro:");
             record_title_label.setFont(new Font("Arial", Font.PLAIN, 16));
             record_title_label.setSize(300, 30);
-            record_title_label.setLocation(50, 70);
+            record_title_label.setLocation(50, 50);
             c.add(record_title_label);
             
             record_title = new JTextField();
             record_title.setFont(new Font("Arial", Font.PLAIN, 20));
             record_title.setSize(250, 30);
-            record_title.setLocation(50, 100);
+            record_title.setLocation(50, 80);
             String tituloOriginal = patient.records.get(index-1).getTitle();
             record_title.setText(tituloOriginal);
             c.add(record_title);
@@ -320,13 +321,13 @@ public class RecordWindow
             record_title_label = new JLabel("Registro:");
             record_title_label.setFont(new Font("Arial", Font.PLAIN, 16));
             record_title_label.setSize(300, 30);
-            record_title_label.setLocation(50, 135);
+            record_title_label.setLocation(50, 115);
             c.add(record_title_label);
             
             record_body = new JTextArea();
             record_body.setFont(new Font("Arial", Font.PLAIN, 20));
-            record_body.setSize(500, 200);
-            record_body.setLocation(50, 170);
+            record_body.setSize(500, 150);
+            record_body.setLocation(50, 150);
             record_body.setLineWrap(true);
             String registroOriginal = patient.records.get(index-1).getText();
             record_body.setText(registroOriginal);
@@ -335,7 +336,7 @@ public class RecordWindow
             returnButton = new JButton("Cancelar");
             returnButton.setFont(new Font("Arial", Font.PLAIN, 20));
             returnButton.setSize(150, 30);
-            returnButton.setLocation(125, 390);
+            returnButton.setLocation(125, 315);
             c.add(returnButton);
 
             returnButton.addActionListener(new ActionListener() 
@@ -351,7 +352,7 @@ public class RecordWindow
             submitButton = new JButton("Editar");
             submitButton.setFont(new Font("Arial", Font.PLAIN, 20));
             submitButton.setSize(150, 30);
-            submitButton.setLocation(325, 390);
+            submitButton.setLocation(325, 315);
             c.add(submitButton);
 
             submitButton.addActionListener(new ActionListener() 
