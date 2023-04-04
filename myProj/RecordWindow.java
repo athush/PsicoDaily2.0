@@ -136,31 +136,31 @@ public class RecordWindow
                 JLabel tituloLabel = new JLabel("Titulo registro: " + tituloRegistro);
                 tituloLabel.setFont(new Font("Arial", Font.BOLD, 16));
                 tituloLabel.setSize(300, 30);
-                tituloLabel.setLocation(30, altura);
+                tituloLabel.setLocation(40, altura);
 
                 String textoRegistro = record.getText();
                 JLabel textoLabel = new JLabel("Registro: " + textoRegistro);
                 textoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 textoLabel.setSize(350, 30);
-                textoLabel.setLocation(30, altura + 20);
+                textoLabel.setLocation(40, altura + 20);
 
                 int idRegistro = record.getId();
                 JLabel idLabel = new JLabel("ID do Registro: " + idRegistro);
                 idLabel.setFont(new Font("Arial", Font.PLAIN, 16));
                 idLabel.setSize(350, 30);
-                idLabel.setLocation(30, altura + 40);
+                idLabel.setLocation(40, altura + 40);
 
                 //Edit Button
                 JButton editButton = new JButton("Editar");
                 editButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 editButton.setSize(80, 30);
-                editButton.setLocation(400, altura + 10);
+                editButton.setLocation(380, altura + 10);
 
                 editButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        RecordWindow new_window = new RecordWindow(5, window, patient, record.getId());
                         window.dispose();
+                        RecordWindow new_window = new RecordWindow(5, main_window, patient, record.getId());
                     }
                 });
 
@@ -168,7 +168,7 @@ public class RecordWindow
                 JButton deleteButton = new JButton("Excluir");
                 deleteButton.setFont(new Font("Arial", Font.PLAIN, 12));
                 deleteButton.setSize(80, 30);
-                deleteButton.setLocation(500, altura + 10);
+                deleteButton.setLocation(480, altura + 10);
                 
                 deleteButton.addActionListener(new ActionListener() {
                     @Override
@@ -176,8 +176,8 @@ public class RecordWindow
                         int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?");
                         if (resposta == 0) {
                             patient.records.remove(record);
-                            RecordWindow new_window = new RecordWindow(2, window, patient, record.getId());
                             window.dispose();
+                            RecordWindow new_window = new RecordWindow(2, main_window, patient, record.getId());
                             
                         }
                     }
@@ -287,8 +287,8 @@ public class RecordWindow
                     }
                     else
                     {
-                        RecordWindow new_window = new RecordWindow(5, window, patient, idDigitado);
-                        window.setVisible(false);
+                        window.dispose();
+                        RecordWindow new_window = new RecordWindow(5, main_window, patient, idDigitado);
                     }
                 }
             });
@@ -372,7 +372,8 @@ public class RecordWindow
                         
                         JOptionPane.showMessageDialog(null, "Registro editado com sucesso.");
                         window.dispose();
-                        main_window.setVisible(true);
+                        // main_window.setVisible(true);
+                        RecordWindow new_window = new RecordWindow(2, main_window, patient, index);
                     }
 
                 }

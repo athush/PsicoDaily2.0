@@ -3,6 +3,8 @@ package myProj;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;  
 
 public class Menu
 {
@@ -42,35 +44,41 @@ public class Menu
 
             // Show psychologist profile
             JLabel user_profile = new JLabel("Seu perfil: ");
-            user_profile.setFont(new Font("Arial", Font.BOLD, 15));
+            user_profile.setFont(new Font("Arial", Font.BOLD, 18));
             user_profile.setSize(600, 30);
-            user_profile.setLocation(15, 60);
+            user_profile.setLocation(30, 75);
             c.add(user_profile);
 
-            // Nome
+            // Id
+            JLabel idPsicLabel = new JLabel("ID: " + psic.id + "\n");
+            idPsicLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+            idPsicLabel.setSize(600, 30);
+            idPsicLabel.setLocation(30, 100);
+            c.add(idPsicLabel);
 
+            // Nome
             JLabel nomePsico = new JLabel("Nome: " + psic.name + "\n");
-            nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
+            nomePsico.setFont(new Font("Arial", Font.PLAIN, 18));
             nomePsico.setSize(600, 30);
-            nomePsico.setLocation(15, 90);
+            nomePsico.setLocation(30, 125);
             c.add(nomePsico);
 
+            // CRP
             JLabel crpPsico = new JLabel("CRP: "+ psic.crp + "\n");
-            crpPsico.setFont(new Font("Arial", Font.PLAIN, 15));
+            crpPsico.setFont(new Font("Arial", Font.PLAIN, 18));
             crpPsico.setSize(600, 30);
-            crpPsico.setLocation(15, 115);
+            crpPsico.setLocation(30, 150);
             c.add(crpPsico);
 
-            JLabel numPacientes = new JLabel("Quantidade de pacientes: " + psic.patient_list.size()+ "\n");
-            numPacientes.setFont(new Font("Arial", Font.PLAIN, 15));
+            // Num pacientes
+            JLabel numPacientes = new JLabel("Quantidade de pacientes: " + psic.patient_list.size());
+            numPacientes.setFont(new Font("Arial", Font.PLAIN, 18));
             numPacientes.setSize(600, 30);
-            numPacientes.setLocation(15, 140);
+            numPacientes.setLocation(30, 175);
             c.add(numPacientes);
             
             // Show pacients
-
             JButton showPacientes = new JButton("Exibir pacientes");
-
             showPacientes.setFont(new Font("Arial", Font.PLAIN, 15));
             showPacientes.setSize(175, 30);
             showPacientes.setLocation(225, 300);
@@ -79,33 +87,24 @@ public class Menu
             showPacientes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psic);
-                    window.setVisible(false);
-                    window.revalidate();
+                    window.dispose();
+                    ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psic);
                 }
             });
-
-            // Show pacient records
-
-            JButton showRegistros = new JButton("Exibir registro");
-
-            showRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
-            showRegistros.setSize(175, 30);
-            showRegistros.setLocation(425, 300);
-            c.add(showRegistros);
 
             // Link Patients
             JButton link_patients = new JButton("Vincular Paciente");
 
             link_patients.setFont(new Font("Arial", Font.PLAIN, 15));
             link_patients.setSize(175, 30);
-            link_patients.setLocation(25, 250);
+            link_patients.setLocation(425, 300);
             
             link_patients.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    ManagePatientsWindow new_window = new ManagePatientsWindow(2, window, db, psic);
-                    window.setVisible(false);
+                    ManagePatientsWindow new_window = new ManagePatientsWindow(2, main_window, db, psic);
+                    // window.setVisible(false);
+                    window.dispose();
                 }
             });
 
@@ -155,17 +154,25 @@ public class Menu
 
             // Show pacient profile
             JLabel user_profile = new JLabel("Seu perfil: ");
-            user_profile.setFont(new Font("Arial", Font.BOLD, 15));
+            user_profile.setFont(new Font("Arial", Font.BOLD, 18));
             user_profile.setSize(600, 30);
             user_profile.setLocation(30, 75);
             c.add(user_profile);
 
+            // Id
+
+            JLabel idPacLabel = new JLabel("ID: " + patient.id + "\n");
+            idPacLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+            idPacLabel.setSize(600, 30);
+            idPacLabel.setLocation(30, 100);
+            c.add(idPacLabel);
+
             // Name
 
             JLabel nomePsico = new JLabel("Nome: " + patient.name + "\n");
-            nomePsico.setFont(new Font("Arial", Font.PLAIN, 15));
+            nomePsico.setFont(new Font("Arial", Font.PLAIN, 18));
             nomePsico.setSize(600, 30);
-            nomePsico.setLocation(30, 100);
+            nomePsico.setLocation(30, 125);
             c.add(nomePsico);
 
             // Psychologist name
@@ -177,16 +184,46 @@ public class Menu
             }else{
                 psicoName.setText("Psicólogo: Não vinculado");
             }
-            psicoName.setFont(new Font("Arial", Font.PLAIN, 15));
+            psicoName.setFont(new Font("Arial", Font.PLAIN, 18));
             psicoName.setSize(600, 30);
-            psicoName.setLocation(30, 125);
+            psicoName.setLocation(30, 150);
             c.add(psicoName);
 
-            JLabel idPacLabel = new JLabel("Seu id: " + patient.id + "\n");
-            idPacLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-            idPacLabel.setSize(600, 30);
-            idPacLabel.setLocation(30, 150);
-            c.add(idPacLabel);
+            // Next Schedule
+
+            JLabel proxConsulta = new JLabel("Proxima consulta: ");
+            proxConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
+            proxConsulta.setSize(150, 30);
+            proxConsulta.setLocation(30, 175);
+            c.add(proxConsulta);
+
+
+            Boolean temConsulta = patient.checaConsulta;
+            JLabel checaConsulta;
+
+            if (!temConsulta)
+            {
+                checaConsulta = new JLabel("Consulta não marcada.");
+                checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
+                checaConsulta.setSize(350, 30);
+                checaConsulta.setLocation(175, 175);
+            }
+            else {
+                Consulta consultaPaciente = db.checa_consulta(patient);
+                Date horarioConsulta = consultaPaciente.inicio;
+                String pattern = "HH:mm dd-MM-yyyy";
+                SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
+                String horarioConsultaString = dataFormato.format(horarioConsulta);
+
+                System.out.println(horarioConsultaString);
+                checaConsulta = new JLabel(horarioConsultaString);
+                checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
+                checaConsulta.setSize(350, 30);
+                checaConsulta.setLocation(175, 175);
+            }
+
+            c.add(checaConsulta);
+
 
             // Create records
 
@@ -207,47 +244,6 @@ public class Menu
             });
 
             c.add(criarRegistros);
-
-            // Edit records
-
-            JButton editarRegistros = new JButton("Editar Registro");
-
-            editarRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
-            editarRegistros.setSize(175, 30);
-            editarRegistros.setLocation(25, 120);
-
-            editarRegistros.addActionListener(new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) 
-                {
-                    RecordWindow new_window = new RecordWindow(4, window, patient, 0);
-                    window.setVisible(false);
-                }
-            });
-
-            //c.add(editarRegistros);
-
-
-            // Delete records
-
-            JButton excluirRegistros = new JButton("Excluir Registro");
-
-            excluirRegistros.setFont(new Font("Arial", Font.PLAIN, 15));
-            excluirRegistros.setSize(175, 30);
-            excluirRegistros.setLocation(25, 165);
-
-            excluirRegistros.addActionListener(new ActionListener() 
-            {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) 
-                {
-                    RecordWindow new_window = new RecordWindow(3, window, patient, 0);
-                    window.setVisible(false);
-                }
-            });
-
-            //c.add(excluirRegistros);
             
             // Show records
 
@@ -268,15 +264,6 @@ public class Menu
             });
 
             c.add(exibirRegistros);
-
-            // Show pacient records
-
-            JButton mostrarConsultas = new JButton("Consultas Marcadas");
-
-            mostrarConsultas.setFont(new Font("Arial", Font.PLAIN, 15));
-            mostrarConsultas.setSize(175, 30);
-            mostrarConsultas.setLocation(25, 255);
-            //c.add(mostrarConsultas);
 
             // Log out
 

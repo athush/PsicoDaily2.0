@@ -20,20 +20,19 @@ public class ManagePatientsWindow
     private JButton submitButton;
     private JButton returnButton;
 
-    public ManagePatientsWindow(int type, JFrame main_window, Database db, Psic psicologo){
+    public ManagePatientsWindow(int type, JFrame main_window, Database db, User user){
+        Psic psicologo = (Psic) user;
         window.addWindowListener(new WindowAdapter() 
         {
             public void windowClosing(WindowEvent windowEvent)
             {
                 window.dispose();
-                main_window.revalidate();
-                main_window.setVisible(true);
+                Menu menu = new Menu(main_window, user, db);
             }        
         });
         window.setTitle("Seus Pacientes");
         window.setBounds(650, 200, 600, 480);
         window.setResizable(false);
-        
         window.setLayout(new BoxLayout(window, BoxLayout.PAGE_AXIS));
 
         c = window.getContentPane();;
@@ -111,7 +110,7 @@ public class ManagePatientsWindow
                 consultaBotao.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        ConsultasWindow new_window = new ConsultasWindow(1, window, patient, psicologo, db);
+                        ConsultasWindow new_window = new ConsultasWindow(1, main_window, patient, psicologo, db);
                         window.setVisible(false);
                     }
                 });
@@ -218,10 +217,8 @@ public class ManagePatientsWindow
                         psicologo.addPatient(patient);
 
                         JOptionPane.showMessageDialog(null, "Paciente "+ patient.name +" vinculado." );
-                        // main_window.dispose();
                         window.dispose();
-                        main_window.setVisible(true);
-                        // Menu menu = new Menu(main_window, psicologo, db);       // Recebe como janela pai o menu antigo (não atualizado), por isso, ao fechar, abre o menu desatualizado.
+                        Menu menu = new Menu(main_window, psicologo, db);       // Recebe como janela pai o menu antigo (não atualizado), por isso, ao fechar, abre o menu desatualizado.
 
                     }
                 }

@@ -192,7 +192,9 @@ public class ConsultasWindow {
 					pacient.checaConsulta = true;
 
 					window.dispose();
-					main_window.setVisible(true);
+					main_window.dispose();
+					ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
+					// main_window.setVisible(true);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Horarios conflitantes");
