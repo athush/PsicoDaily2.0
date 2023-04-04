@@ -9,7 +9,7 @@ public class Menu
     public boolean isClosed = false;
     JFrame window = new JFrame();
 
-    public Menu(int type, JFrame main_window, Psic psic, Patient patient, Database db) 
+    public Menu(JFrame main_window, User user, Database db)
     {
         window.addWindowListener(new WindowAdapter() 
         {
@@ -20,8 +20,9 @@ public class Menu
             }        
         }); 
 
-        if (type == 1)              // Psicologo
+        if (user instanceof Psic)              // Psicologo
         {
+            Psic psic = (Psic) user;
             window.setTitle("Menu Psicologo");
             window.setBounds(640, 200, 640, 400);
             window.setResizable(false);
@@ -60,7 +61,7 @@ public class Menu
             crpPsico.setLocation(15, 115);
             c.add(crpPsico);
 
-            JLabel numPacientes = new JLabel("Quantidade de pacientes: "+psic.patient_list.size()+ "\n");
+            JLabel numPacientes = new JLabel("Quantidade de pacientes: " + psic.patient_list.size()+ "\n");
             numPacientes.setFont(new Font("Arial", Font.PLAIN, 15));
             numPacientes.setSize(600, 30);
             numPacientes.setLocation(15, 140);
@@ -131,8 +132,9 @@ public class Menu
             window.add(jPanel);
             window.setVisible(true);
         }
-        else if (type == 2)         // Patient
+        else if (user instanceof Patient)         // Patient
         {
+            Patient patient = (Patient) user;
             window.setTitle("Menu Paciente");
             window.setBounds(640, 200, 640, 400);
             window.setResizable(false);
@@ -168,7 +170,7 @@ public class Menu
             // Psychologist name
             JLabel psicoName = new JLabel();
 
-            Psic psic_patient = db.get_psic(patient.psic_id);
+            User psic_patient = db.get_user(patient.psic_id);
             if(psic_patient != null){
                 psicoName.setText("Psicólogo: " + psic_patient.name);
             }else{

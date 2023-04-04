@@ -63,24 +63,6 @@ public class Login
             passwordLabel.setSize(300, 30);
             passwordLabel.setLocation(150, 180);
 
-            // RadioButton (Psichologist or pacient)
-            JRadioButton psicho = new JRadioButton("Psicólogo");
-            JRadioButton pacient = new JRadioButton("Paciente");
-
-            psicho.setFont(new Font("Arial", Font.PLAIN, 12));
-            psicho.setSelected(true);
-            psicho.setSize(80, 20);
-            psicho.setLocation(150, 250);
-
-            pacient.setFont(new Font("Arial", Font.PLAIN, 12));
-            pacient.setSelected(false);
-            pacient.setSize(80, 20);
-            pacient.setLocation(240, 250);
-
-            ButtonGroup group = new ButtonGroup();
-            group.add(psicho);
-            group.add(pacient);
-
             // Submit Button
             JButton submit = new JButton("Confirmar");
 
@@ -96,51 +78,25 @@ public class Login
                     String email = emailInput.getText();
                     char[] password = passwordInput.getPassword();
 
-                    if (psicho.isSelected())
+                    User found = db.get_user(email);
+
+                    if (found != null)
                     {
-                        Psic found = db.get_psic(email);
+                        Boolean compare = Arrays.equals(password, found.password);
 
-                        if (found != null)
+                        if (compare)
                         {
-                            Boolean compare = Arrays.equals(password, found.password);
-
-                            if (compare)
-                            {
-                                Menu menu = new Menu(1, main_window, found, null, db);
-                                window.dispose();
-                            }
-                            else
-                            {
-                                JOptionPane.showMessageDialog(null, "Senha incorreta!");
-                            }
+                            Menu menu = new Menu(main_window, found, db);
+                            window.dispose();
                         }
-                        else 
+                        else
                         {
-                            JOptionPane.showMessageDialog(null, "Usuário não existe!");
+                            JOptionPane.showMessageDialog(null, "Senha incorreta!");
                         }
                     }
-                    else if (pacient.isSelected())
+                    else 
                     {
-                        Patient found = db.get_patient(email);
-
-                        if (found != null)
-                        {
-                            Boolean compare = Arrays.equals(password, found.password);
-
-                            if (compare)
-                            {
-                                Menu menu = new Menu(2, main_window, null, found, db);
-                                window.dispose();
-                            }
-                            else
-                            {
-                                JOptionPane.showMessageDialog(null, "Senha incorreta!");
-                            }
-                        }
-                        else 
-                        {
-                            JOptionPane.showMessageDialog(null, "Usuário não existe!");
-                        }
+                        JOptionPane.showMessageDialog(null, "Usuário não existe!");
                     }
                 }
             });
@@ -152,8 +108,6 @@ public class Login
             c.add(emailInput);
             c.add(passwordLabel);
             c.add(passwordInput);
-            c.add(pacient);
-            c.add(psicho);
             c.add(submit);
 
             window.add(jPanel);
@@ -257,8 +211,10 @@ public class Login
                     String cpf = cpfInput.getText();
                     String crp = crpInput.getText();
                     char[] password = passwordInput.getPassword();
+                    
+                    User new_psic = new Psic(db.autoinc_user, name, email, password, cpf, crp);
 
-                    db.add_psico(name, email, cpf, crp, password);
+                    new_psic.add_user(db);
                     JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
                     window.dispose();
                     main_window.setVisible(true);
@@ -388,7 +344,9 @@ public class Login
                     String cpf = cpfInput.getText();
                     char[] password = passwordInput.getPassword();
 
-                    db.add_patient(name, email, cpf, password);
+                    User new_patient = new Patient(db.autoinc_user, name, email, password, cpf);
+
+                    new_patient.add_user(db);
                     JOptionPane.showMessageDialog(null, "Paciente Cadastrado!");
                     window.dispose();
                     main_window.setVisible(true);

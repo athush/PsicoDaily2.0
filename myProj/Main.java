@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.UUID;
 
 class MyFrame implements ActionListener 
 {

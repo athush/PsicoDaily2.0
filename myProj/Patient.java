@@ -17,6 +17,21 @@ public class Patient extends User
         this.psic_id = -1;
     }
 
+    @Override
+    public void profile() {
+        System.out.println("Paciente: ");
+
+        System.out.println("Nome: " + this.name);
+        System.out.println("CPF: " + this.cpf);
+    }
+
+    @Override
+    public void add_user(Database db){
+        
+        db.autoinc_user++;
+        db.database_user.add(this);
+    }
+
     public boolean addRecord(String title, String text, int id)
     {
         Record newRecord = new Record(title, text, id);
@@ -30,16 +45,6 @@ public class Patient extends User
 
         records.set(id - 1, newRecord);
         return true;
-    }
-
-
-    @Override
-    public void profile() 
-    {
-        System.out.println("Paciente: ");
-
-        System.out.println("Nome: " + this.name);
-        System.out.println("CPF: " + this.cpf);
     }
 
     public void setPsico(int id){

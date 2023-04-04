@@ -18,4 +18,5 @@ abstract class User
     }
 
     abstract void profile();
+    abstract void add_user(Database db);
 }

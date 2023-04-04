@@ -3,7 +3,6 @@ package myProj;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.UUID;
 import java.util.Date;
 import java.text.SimpleDateFormat;  
 
@@ -203,7 +202,7 @@ public class ManagePatientsWindow
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     int idDigitado = Integer.parseInt(id_text_area.getText());
-                    Patient patient = db.get_patient(idDigitado);
+                    Patient patient = (Patient) db.get_user(idDigitado);
                     
                     if (patient == null) {
                         JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
@@ -217,7 +216,7 @@ public class ManagePatientsWindow
                         patient.setPsico(psicologo.id);
                         psicologo.addPatient(patient);
 
-                        JOptionPane.showMessageDialog(null, "Paciente "+patient.name+" vinculado." );
+                        JOptionPane.showMessageDialog(null, "Paciente "+ patient.name +" vinculado." );
                         window.dispose();
                         main_window.setVisible(true);
                     }

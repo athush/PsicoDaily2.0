@@ -11,15 +11,7 @@ public class Psic extends User
     {
         super(id, name, email, password, cpf);
         this.crp = crp;
-
-        // addTest();
     }
-
-    // public void addTest(){
-    //     Patient new_patient = new Patient(1, "Eduardo", "eduardo", password, "234.123.567-76");
-
-    //     patient_list.add(new_patient);
-    // }
 
     public void addPatient(Patient patient){
         patient_list.add(patient);
@@ -34,5 +26,11 @@ public class Psic extends User
         System.out.println("CPF: " + this.cpf);
         System.out.println("CRP: " + this.crp);
 
+    }
+
+    public void add_user(Database db) {
+        
+        db.autoinc_user++; 
+        db.database_user.add(this);
     }
 }
