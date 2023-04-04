@@ -57,6 +57,19 @@ public class Database
         database_consulta.add(consulta);
     }
 
+    public boolean desmarca_consulta(Consulta consulta, Patient patient)
+    {
+        for (Consulta c : database_consulta)
+        {
+            if (c.id_paciente == patient.id)
+            {
+                database_consulta.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Consulta checa_consulta (Patient patient)
     {
         for (Consulta consulta:database_consulta)
