@@ -26,6 +26,7 @@ public class ManagePatientsWindow
             public void windowClosing(WindowEvent windowEvent)
             {
                 window.dispose();
+                main_window.revalidate();
                 main_window.setVisible(true);
             }        
         });
@@ -143,7 +144,7 @@ public class ManagePatientsWindow
                             patient.psic_id = -1;
 
                             window.dispose();
-                            ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psicologo);
+                            ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
                         }
                     }
                 });
@@ -217,8 +218,11 @@ public class ManagePatientsWindow
                         psicologo.addPatient(patient);
 
                         JOptionPane.showMessageDialog(null, "Paciente "+ patient.name +" vinculado." );
+                        // main_window.dispose();
                         window.dispose();
                         main_window.setVisible(true);
+                        // Menu menu = new Menu(main_window, psicologo, db);       // Recebe como janela pai o menu antigo (não atualizado), por isso, ao fechar, abre o menu desatualizado.
+
                     }
                 }
             });

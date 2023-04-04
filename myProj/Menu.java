@@ -81,6 +81,7 @@ public class Menu
                 public void actionPerformed(ActionEvent actionEvent) {
                     ManagePatientsWindow new_window = new ManagePatientsWindow(1, window, db, psic);
                     window.setVisible(false);
+                    window.revalidate();
                 }
             });
 
