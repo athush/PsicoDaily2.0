@@ -101,20 +101,52 @@ public class ManagePatientsWindow
 
                 // Marcar consulta
 
-                JButton consultaBotao = new JButton("Consulta");
-                consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
-                consultaBotao.setSize(110, 30);
-                consultaBotao.setLocation(210, altura + 10);
+                if (db.checa_consulta(patient) == null)
+                {
+                    JButton consultaBotao = new JButton("Marcar consulta");
+                    consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
+                    consultaBotao.setSize(110, 30);
+                    consultaBotao.setLocation(210, altura + 10);
+    
+                    consultaBotao.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) {
+                            ConsultasWindow new_window = new ConsultasWindow(1, main_window, patient, psicologo, db);
+                            window.setVisible(false);
+                        }
+                    });
 
-                consultaBotao.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        ConsultasWindow new_window = new ConsultasWindow(1, main_window, patient, psicologo, db);
-                        window.setVisible(false);
-                    }
-                });
+                    c.add(consultaBotao);
+                }
+                else
+                {
+                    JButton consultaBotao = new JButton("Desmarcar consulta");
+                    consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
+                    consultaBotao.setSize(110, 30);
+                    consultaBotao.setLocation(210, altura + 10);
+    
+                    consultaBotao.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) 
+                        {
+                            patient.checaConsulta = false;
+                            boolean consulta = db.desmarca_consulta(db.checa_consulta(patient), patient);
 
-                c.add(consultaBotao);
+                            if (consulta)
+                            {
+                                JOptionPane.showMessageDialog(null, "Consulta desmarcada.");
+                                window.dispose();
+                                ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Consulta não encontrada!");
+                            }
+                        }
+                    });
+
+                    c.add(consultaBotao);
+                }
 
                 JButton recordsButton = new JButton("Registros");
                 recordsButton.setFont(new Font("Arial", Font.PLAIN, 12));
