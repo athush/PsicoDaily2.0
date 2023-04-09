@@ -31,21 +31,28 @@ public class Consulta {
         return true;
     }
 
-    public boolean setHorario(String hora_inicio, String hora_termino, ArrayList<Consulta> consultas) {
-        // retorna false se deu errado
-        SimpleDateFormat f = new SimpleDateFormat("HH:mm dd-MM-yyyy");
-            Date date_inicio, date_termino;
+    public boolean setHorario(Date dia, String horario_inicio, String horario_fim, ArrayList<Consulta> consultas) {
+        // retorna false se deu errado       
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+        String toDate = f.format(dia);
+        
+        Date date_inicio, date_termino;
 
-        try {
-            date_inicio = f.parse(hora_inicio);
-            date_termino = f.parse(hora_termino);
+        try 
+        {    
+            SimpleDateFormat aux = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+            
+            date_inicio = aux.parse(horario_inicio + " " + toDate);
+            date_termino = aux.parse(horario_fim + " " + toDate);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             System.out.println("Horário inválido");
             return false;
         }
         
-        if(checkHorario(consultas, date_inicio, date_termino)) {
+        if(checkHorario(consultas, date_inicio, date_termino)) 
+        {
             this.inicio = date_inicio;
             this.termino = date_termino;
             return true;
