@@ -93,7 +93,7 @@ public class ConsultasWindow {
 		c.add(month);
 		year = new JComboBox(years);
 		year.setFont(new Font("Arial", Font.PLAIN, 15));
-		year.setSize(60, 20);
+		year.setSize(80, 20);
 		year.setLocation(340, 150);
 		c.add(year);
 

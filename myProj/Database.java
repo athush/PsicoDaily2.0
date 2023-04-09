@@ -10,7 +10,7 @@ public class Database
 
     public Database()
     {
-        autoinc_consulta = autoinc_user = 0;
+        autoinc_consulta = autoinc_user = 2;
         add_test();
     }
 
@@ -18,9 +18,9 @@ public class Database
     {
         char[] password = {'1', '2', '3'};
     
-        Psic psic = new Psic(9, "Luis", "luis", password, "123.456.789-00", "1002000");
+        Psic psic = new Psic(0, "Luis", "luis@gmail.com", password, "123.456.789-00", "1002000");
 
-        Patient patient = new Patient(10, "Eduardo", "eduardo", password, "234.123.567-76"); 
+        Patient patient = new Patient(1, "Eduardo", "eduardo@gmail.com", password, "234.123.567-76"); 
         
         database_user.add(psic);
         database_user.add(patient);
@@ -48,6 +48,11 @@ public class Database
         }
 
         return null;
+    }
+    
+    public void add_user(User user){
+        autoinc_user++;
+        database_user.add(user);
     }
 
     public void add_consulta(Consulta consulta) {

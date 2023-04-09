@@ -1,12 +1,14 @@
 package myProj;
 
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.*;
 
 class MyFrame implements ActionListener 
 {
@@ -17,6 +19,7 @@ class MyFrame implements ActionListener
     private JButton login;
     private JButton register;
     private JButton sair;
+    private JButton exibir;
 
 	public MyFrame()
 	{
@@ -103,8 +106,8 @@ class MyFrame implements ActionListener
 
         sair = new JButton("Sair");
         sair.setFont(new Font("Arial", Font.PLAIN, 15));
-        sair.setSize(300, 30);
-        sair.setLocation(150, 300);
+        sair.setSize(135, 30);
+        sair.setLocation(155, 300);
         
         sair.addActionListener(new ActionListener() 
         {
@@ -116,7 +119,21 @@ class MyFrame implements ActionListener
         });
         
         c.add(sair);
+        
+        exibir = new JButton("Usuários");
+        exibir.setFont(new Font("Arial", Font.PLAIN, 15));
+        exibir.setSize(135, 30);
+        exibir.setLocation(310, 300);
 
+        exibir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ManagePatientsWindow telaUsuarios = new ManagePatientsWindow(3, window, db, null);
+                //db.exibir_usuarios();
+            }
+        });
+
+        c.add(exibir);
 		window.setVisible(true);
 	}
 
