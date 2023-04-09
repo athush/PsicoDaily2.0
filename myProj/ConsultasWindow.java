@@ -3,8 +3,17 @@ package myProj;
 import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.awt.event.*;
+import java.nio.channels.SelectableChannel;
 import java.awt.*;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 
+import java.sql.*;
+import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import org.jdatepicker.impl.*;
+import org.jdatepicker.util.*;
+import org.jdatepicker.*;
 
 public class ConsultasWindow {
     
@@ -81,56 +90,36 @@ public class ConsultasWindow {
 		dataLabel.setLocation(0, 80);
 		c.add(dataLabel);
 
-		date = new JComboBox(dates);
-		date.setFont(new Font("Arial", Font.PLAIN, 15));
-		date.setSize(60, 20);
-		date.setLocation(200, 150);
-		c.add(date);
-		month = new JComboBox(months);
-		month.setFont(new Font("Arial", Font.PLAIN, 15));
-		month.setSize(60, 20);
-		month.setLocation(270, 150);
-		c.add(month);
-		year = new JComboBox(years);
-		year.setFont(new Font("Arial", Font.PLAIN, 15));
-		year.setSize(60, 20);
-		year.setLocation(340, 150);
-		c.add(year);
+		UtilDateModel model = new UtilDateModel();
 
-		JLabel inicioLabel = new JLabel("Horario de inicio: ");
-		inicioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-		inicioLabel.setSize(150, 20);
-		inicioLabel.setLocation(110, 200);
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setLocation(210, 150);
+		datePicker.setSize(200, 40);
+		
+		c.add(datePicker);
+
+		JLabel inicioLabel = new JLabel("Horário", JLabel.CENTER);
+		inicioLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		inicioLabel.setSize(600, 20);
+		inicioLabel.setLocation(0, 200);
 		c.add(inicioLabel);
 
 		horasInicio = new JComboBox(hours);
 		horasInicio.setFont(new Font("Arial", Font.PLAIN, 15));
 		horasInicio.setSize(60, 20);
-		horasInicio.setLocation(230, 200);
+		horasInicio.setLocation(230, 230);
 		c.add(horasInicio);
 		minutosInicio = new JComboBox(minutes);
 		minutosInicio.setFont(new Font("Arial", Font.PLAIN, 15));
 		minutosInicio.setSize(60, 20);
-		minutosInicio.setLocation(310, 200);
+		minutosInicio.setLocation(310, 230);
 		c.add(minutosInicio);
-
-		JLabel fimLabel = new JLabel("Horario de fim: ");
-		fimLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-		fimLabel.setSize(150, 20);
-		fimLabel.setLocation(110, 240);
-		c.add(fimLabel);
-
-		horasFim = new JComboBox(hours);
-		horasFim.setFont(new Font("Arial", Font.PLAIN, 15));
-		horasFim.setSize(60, 20);
-		horasFim.setLocation(230, 240);
-		c.add(horasFim);
-
-		minutosFim = new JComboBox(minutes);
-		minutosFim.setFont(new Font("Arial", Font.PLAIN, 15));
-		minutosFim.setSize(60, 20);
-		minutosFim.setLocation(310, 240);
-		c.add(minutosFim);
 
 		// Retornar
 
@@ -162,41 +151,53 @@ public class ConsultasWindow {
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-				// String dia = diaInput.getText();
-				// String mes = mesInput.getText();
-				// String ano = anoInput.getText();
-
-				String dia = date.getSelectedItem().toString();
-				String mes = month.getSelectedItem().toString();
-				String ano = year.getSelectedItem().toString();
-
-				String horaInicio = horasInicio.getSelectedItem().toString();
-				String minutoInicio = minutosFim.getSelectedItem().toString();
-				String horaFim = horasFim.getSelectedItem().toString();
-				String minutoFim = minutosFim.getSelectedItem().toString();
-
-				Consulta novaConsulta = new Consulta(pacient.id, psicologo.id, -1);
-
-				String horarioDataInico = horaInicio + ":" + minutoInicio + " " + dia + "-" + mes + "-" + ano;
-				String horarioDataFim = horaFim + ":" + minutoFim + " " + dia + "-" + mes + "-" + ano;
-
-				System.out.println(horarioDataInico);
-				System.out.println(horarioDataFim);
-
-				boolean horaValida = novaConsulta.setHorario(horarioDataInico, horarioDataFim, db.database_consulta);
-				if (horaValida)
+				Date now = new Date();
+				Date selectedDate = (Date) datePicker.getModel().getValue();
+        
+				if (selectedDate.compareTo(now) <= 0)
 				{
-					JOptionPane.showMessageDialog(null, "Consulta marcada.");
-					db.add_consulta(novaConsulta);
-					pacient.checaConsulta = true;
-
-					window.dispose();
-					main_window.dispose();
-					ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
-					// main_window.setVisible(true);
+					System.out.println("");
+					JOptionPane.showMessageDialog(null, "Data inválida!");
+					
 				}
-				else {
-					JOptionPane.showMessageDialog(null, "Horarios conflitantes");
+				else
+				{
+					String horaInicio = horasInicio.getSelectedItem().toString();
+					String minutoInicio = minutosInicio.getSelectedItem().toString();
+
+					Consulta novaConsulta = new Consulta(pacient.id, psicologo.id, -1);
+
+					String horarioDataInicio = horaInicio + ":" + minutoInicio;
+					
+					// Encontrando horário de fim
+					int aux = Integer.parseInt(horaInicio) + 1;
+					String horarioDataFim = "";
+					
+					if (aux < 10)
+					{
+						horarioDataFim = "0" + String.valueOf(aux) + ":" + minutoInicio;
+					}
+					else
+					{
+						horarioDataFim = String.valueOf(aux) + ":" + minutoInicio;
+					}  
+
+					boolean horaValida = novaConsulta.setHorario(selectedDate, horarioDataInicio, horarioDataFim, db.database_consulta);
+					if (horaValida)
+					{
+						JOptionPane.showMessageDialog(null, "Consulta marcada.");
+						db.add_consulta(novaConsulta);
+						pacient.checaConsulta = true;
+
+						window.dispose();
+						main_window.dispose();
+						ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
+						// main_window.setVisible(true);
+					}
+					else 
+					{
+						JOptionPane.showMessageDialog(null, "Horário inválido!");
+					}
 				}
             }
         });
