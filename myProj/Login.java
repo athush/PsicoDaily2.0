@@ -75,28 +75,22 @@ public class Login
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    String email = emailInput.getText();
-                    char[] password = passwordInput.getPassword();
+                    try{
+                        String email = emailInput.getText();
+                        char[] password = passwordInput.getPassword();
 
-                    User found = db.get_user(email);
+                        User found = db.get_user(email);
 
-                    if (found != null)
-                    {
                         Boolean compare = Arrays.equals(password, found.password);
 
-                        if (compare)
-                        {
+                        if (compare) {
                             Menu menu = new Menu(main_window, found, db);
                             window.dispose();
-                        }
-                        else
-                        {
+                        } else {
                             JOptionPane.showMessageDialog(null, "Senha incorreta!");
                         }
-                    }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Usuário não existe!");
+                    }catch(NullPointerException e){
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 }
             });

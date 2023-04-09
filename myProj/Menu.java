@@ -177,18 +177,18 @@ public class Menu
 
             // Psychologist name
             JLabel psicoName = new JLabel();
-
-            User psic_patient = db.get_user(patient.psic_id);
-            if(psic_patient != null){
+            try {
+                User psic_patient = db.get_user(patient.psic_id);
                 psicoName.setText("Psicólogo: " + psic_patient.name);
-            }else{
+            } catch (NullPointerException e) {
                 psicoName.setText("Psicólogo: Não vinculado");
+            }finally{
+                psicoName.setFont(new Font("Arial", Font.PLAIN, 18));
+                psicoName.setSize(600, 30);
+                psicoName.setLocation(30, 150);
+                c.add(psicoName);
             }
-            psicoName.setFont(new Font("Arial", Font.PLAIN, 18));
-            psicoName.setSize(600, 30);
-            psicoName.setLocation(30, 150);
-            c.add(psicoName);
-
+            
             // Next Schedule
 
             JLabel proxConsulta = new JLabel("Proxima consulta: ");

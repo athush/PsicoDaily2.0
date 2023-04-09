@@ -62,9 +62,7 @@ public class ManagePatientsWindow {
 
             checaConsulta = new JLabel("");
 
-            for (int i = 0; i < numPatients; i++) {
-                Patient patient = psicologo.patient_list.get(i);
-
+            for (Patient patient : psicologo.patient_list) {
                 JLabel name = new JLabel("Nome: " + patient.name);
                 name.setSize(300, 30);
                 name.setFont(new Font("Arial", Font.BOLD, 16));
@@ -132,16 +130,16 @@ public class ManagePatientsWindow {
                     consultaBotao.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
-                            patient.checaConsulta = false;
-                            boolean consulta = db.desmarca_consulta(db.checa_consulta(patient), patient);
+                            try {
+                                patient.checaConsulta = false;
+                                db.desmarca_consulta(db.checa_consulta(patient), patient);
 
-                            if (consulta) {
                                 JOptionPane.showMessageDialog(null, "Consulta desmarcada.");
                                 window.dispose();
                                 ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db,
                                         psicologo);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Consulta não encontrada!");
+                            } catch (RuntimeException e) {
+                                JOptionPane.showMessageDialog(null, e.getMessage());
                             }
                         }
                     });
@@ -233,29 +231,36 @@ public class ManagePatientsWindow {
             submitButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    int idDigitado = Integer.parseInt(id_text_area.getText());
-                    Patient patient = (Patient) db.get_user(idDigitado);
+                    try {
+                        int idDigitado = Integer.parseInt(id_text_area.getText());
+                        Patient patient = (Patient) db.get_user(idDigitado);
 
-                    if (patient == null) {
+                        if (patient.psic_id != -1) {
+                            JOptionPane.showMessageDialog(null, "Paciente já possui psicólogo.");
+                        } else {
+                            patient.setPsico(psicologo.id);
+                            psicologo.addPatient(patient);
+
+                            JOptionPane.showMessageDialog(null, "Paciente " + patient.name + " vinculado.");
+                            window.dispose();
+                            Menu menu = new Menu(main_window, psicologo, db); // Recebe como janela pai o menu antigo
+                                                                              // (não
+                                                                              // atualizado), por isso, ao fechar, abre
+                                                                              // o
+                                                                              // menu desatualizado.
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Digite o ID corretamente");
+
+                    } catch (NullPointerException e){
                         JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
-                    } else if (patient.psic_id != -1) {
-                        JOptionPane.showMessageDialog(null, "Paciente já possui psicólogo.");
-                    } else {
-                        patient.setPsico(psicologo.id);
-                        psicologo.addPatient(patient);
-
-                        JOptionPane.showMessageDialog(null, "Paciente " + patient.name + " vinculado.");
-                        window.dispose();
-                        Menu menu = new Menu(main_window, psicologo, db); // Recebe como janela pai o menu antigo (não
-                                                                          // atualizado), por isso, ao fechar, abre o
-                                                                          // menu desatualizado.
-
                     }
                 }
             });
 
             c.add(submitButton);
-        } else if (type == 3) {
+
+        } else if (type == 3) { //   Profile
             title = new JLabel("Todos os usuários", JLabel.CENTER);
             title.setFont(new Font("Arial", Font.BOLD, 30));
             title.setSize(600, 60);

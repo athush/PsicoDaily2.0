@@ -28,26 +28,20 @@ public class Database
 
     public User get_user(String email)
     {        
-        for (int i = 0; i < database_user.size(); i++)
-        {
-            User user_atual = database_user.get(i);
-            
+        for (User user_atual : database_user){
             if (email.equals(user_atual.email))
                 return user_atual;
         }
 
-        return null;
+        throw new NullPointerException("Usuário não existe!");
     }
 
-    public User get_user(int id) {
-        for (int i = 0; i < database_user.size(); i++) {
-            User user_atual = database_user.get(i);
-
+    public User     get_user(int id) {
+        for (User user_atual : database_user) {
             if (id == user_atual.id)
                 return user_atual;
         }
-
-        return null;
+        throw new NullPointerException("Usuário não existe!");
     }
     
     public void add_user(User user){
@@ -62,17 +56,16 @@ public class Database
         database_consulta.add(consulta);
     }
 
-    public boolean desmarca_consulta(Consulta consulta, Patient patient)
+    public void desmarca_consulta(Consulta consulta, Patient patient)
     {
         for (Consulta c : database_consulta)
         {
-            if (c.id_paciente == patient.id)
-            {
+            if (c.id_paciente == patient.id){
                 database_consulta.remove(c);
-                return true;
+                return ;
             }
         }
-        return false;
+        throw new RuntimeException("Consulta não marcada!");
     }
 
     public Consulta checa_consulta (Patient patient)
@@ -81,10 +74,11 @@ public class Database
         {
             if (consulta.id_paciente == patient.id)
             {
-                System.out.println(consulta.inicio.toString());
+                //System.out.println(consulta.inicio.toString());
                 return consulta;
             }
         }
+        //throw new NullPointerException();
         return null;
     }
 }
