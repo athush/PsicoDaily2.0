@@ -18,18 +18,14 @@ public class Patient extends User
     }
 
     @Override
-    public void profile() {
-        System.out.println("Paciente: ");
+    public ArrayList<String> profile() {
+        ArrayList<String> dados = new ArrayList<String>();
 
-        System.out.println("Nome: " + this.name);
-        System.out.println("CPF: " + this.cpf);
-    }
+        dados.add("Paciente: " + name);
+        dados.add("Email: " + email);
+        dados.add("CPF: " + cpf);
 
-    @Override
-    public void add_user(Database db){
-        
-        db.autoinc_user++;
-        db.database_user.add(this);
+        return dados;
     }
 
     public boolean addRecord(String title, String text, int id)

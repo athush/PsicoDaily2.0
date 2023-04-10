@@ -2,35 +2,28 @@ package myProj;
 
 import java.util.ArrayList;
 
-public class Psic extends User
-{
+public class Psic extends User {
     String crp;
     ArrayList<Patient> patient_list = new ArrayList<Patient>();
 
-    public Psic(int id, String name, String email, char[] password, String cpf, String crp)
-    {
+    public Psic(int id, String name, String email, char[] password, String cpf, String crp) {
         super(id, name, email, password, cpf);
         this.crp = crp;
     }
 
-    public void addPatient(Patient patient){
+    public void addPatient(Patient patient) {
         patient_list.add(patient);
     }
 
     @Override
-    public void profile() 
-    {
-        System.out.println("Psicólogo: ");
+    public ArrayList<String> profile() {
+        ArrayList<String> dados = new ArrayList<String>();
+    
+        dados.add("Psicólogo: " + name);
+        dados.add("Email: " + email);
+        dados.add("CPF: " + cpf );
+        dados.add("CRP: " + crp);
 
-        System.out.println("Nome: " + this.name);
-        System.out.println("CPF: " + this.cpf);
-        System.out.println("CRP: " + this.crp);
-
-    }
-
-    public void add_user(Database db) {
-        
-        db.autoinc_user++; 
-        db.database_user.add(this);
+        return dados;
     }
 }

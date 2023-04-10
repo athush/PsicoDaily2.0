@@ -10,7 +10,7 @@ public class Database
 
     public Database()
     {
-        autoinc_consulta = autoinc_user = 0;
+        autoinc_consulta = autoinc_user = 2;
         add_test();
     }
 
@@ -18,9 +18,9 @@ public class Database
     {
         char[] password = {'1', '2', '3'};
     
-        Psic psic = new Psic(9, "Luis", "luis", password, "123.456.789-00", "1002000");
+        Psic psic = new Psic(0, "Luis", "luis@gmail.com", password, "123.456.789-00", "1002000");
 
-        Patient patient = new Patient(10, "Eduardo", "eduardo", password, "234.123.567-76"); 
+        Patient patient = new Patient(1, "Eduardo", "eduardo@gmail.com", password, "234.123.567-76"); 
         
         database_user.add(psic);
         database_user.add(patient);
@@ -28,26 +28,25 @@ public class Database
 
     public User get_user(String email)
     {        
-        for (int i = 0; i < database_user.size(); i++)
-        {
-            User user_atual = database_user.get(i);
-            
+        for (User user_atual : database_user){
             if (email.equals(user_atual.email))
                 return user_atual;
         }
 
-        return null;
+        throw new NullPointerException("Usuário não existe!");
     }
 
-    public User get_user(int id) {
-        for (int i = 0; i < database_user.size(); i++) {
-            User user_atual = database_user.get(i);
-
+    public User     get_user(int id) {
+        for (User user_atual : database_user) {
             if (id == user_atual.id)
                 return user_atual;
         }
-
-        return null;
+        throw new NullPointerException("Usuário não existe!");
+    }
+    
+    public void add_user(User user){
+        autoinc_user++;
+        database_user.add(user);
     }
 
     public void add_consulta(Consulta consulta) {
@@ -57,17 +56,16 @@ public class Database
         database_consulta.add(consulta);
     }
 
-    public boolean desmarca_consulta(Consulta consulta, Patient patient)
+    public void desmarca_consulta(Consulta consulta, Patient patient)
     {
         for (Consulta c : database_consulta)
         {
-            if (c.id_paciente == patient.id)
-            {
+            if (c.id_paciente == patient.id){
                 database_consulta.remove(c);
-                return true;
+                return ;
             }
         }
-        return false;
+        throw new RuntimeException("Consulta não marcada!");
     }
 
     public Consulta checa_consulta (Patient patient)
@@ -76,10 +74,11 @@ public class Database
         {
             if (consulta.id_paciente == patient.id)
             {
-                System.out.println(consulta.inicio.toString());
+                //System.out.println(consulta.inicio.toString());
                 return consulta;
             }
         }
+        //throw new NullPointerException();
         return null;
     }
 }

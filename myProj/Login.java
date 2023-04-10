@@ -75,28 +75,22 @@ public class Login
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) 
                 {
-                    String email = emailInput.getText();
-                    char[] password = passwordInput.getPassword();
+                    try{
+                        String email = emailInput.getText();
+                        char[] password = passwordInput.getPassword();
 
-                    User found = db.get_user(email);
+                        User found = db.get_user(email);
 
-                    if (found != null)
-                    {
                         Boolean compare = Arrays.equals(password, found.password);
 
-                        if (compare)
-                        {
+                        if (compare) {
                             Menu menu = new Menu(main_window, found, db);
                             window.dispose();
-                        }
-                        else
-                        {
+                        } else {
                             JOptionPane.showMessageDialog(null, "Senha incorreta!");
                         }
-                    }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(null, "Usuário não existe!");
+                    }catch(NullPointerException e){
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 }
             });
@@ -214,7 +208,7 @@ public class Login
                     
                     User new_psic = new Psic(db.autoinc_user, name, email, password, cpf, crp);
 
-                    new_psic.add_user(db);
+                    db.add_user(new_psic);
                     JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
                     window.dispose();
                     main_window.setVisible(true);
@@ -346,7 +340,7 @@ public class Login
 
                     User new_patient = new Patient(db.autoinc_user, name, email, password, cpf);
 
-                    new_patient.add_user(db);
+                    db.add_user(new_patient);
                     JOptionPane.showMessageDialog(null, "Paciente Cadastrado!");
                     window.dispose();
                     main_window.setVisible(true);

@@ -1,15 +1,15 @@
 package myProj;
 
-abstract class User 
-{
+import java.util.ArrayList;
+
+abstract class User {
     int id;
     String name;
     String email;
     char[] password;
     String cpf;
 
-    public User(int id, String name, String email, char[] password, String cpf)
-    {
+    public User(int id, String name, String email, char[] password, String cpf) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -17,6 +17,5 @@ abstract class User
         this.cpf = cpf;
     }
 
-    abstract void profile();
-    abstract void add_user(Database db);
+    abstract ArrayList<String> profile();
 }
