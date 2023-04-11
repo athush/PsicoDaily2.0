@@ -18,9 +18,9 @@ public class Database
     {
         char[] password = {'U', 's', 'u', 'a', 'r', 'i', 'o', 's', '1', '!'};
     
-        Psic psic = new Psic(0, "Luis", "luis@gmail.com", password, "123.456.789-00", "1002000");
+        Psic psic = new Psic(0, "Luis", "luis@gmail.com", password, "588.214.340-36", "100200");
 
-        Patient patient = new Patient(1, "Eduardo", "eduardo@gmail.com", password, "234.123.567-76"); 
+        Patient patient = new Patient(1, "Eduardo", "eduardo@gmail.com", password, "079.205.710-49"); 
         
         database_user.add(psic);
         database_user.add(patient);
