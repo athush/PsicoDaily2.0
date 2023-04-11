@@ -91,6 +91,7 @@ public class ConsultasWindow {
 		c.add(dataLabel);
 
 		UtilDateModel model = new UtilDateModel();
+		model.setDate(2023, 5, 11);
 
 		Properties p = new Properties();
 		p.put("text.today", "Today");
@@ -98,9 +99,12 @@ public class ConsultasWindow {
 		p.put("text.year", "Year");
 
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		//datePanel.setSize(300, 300);
+		datePanel.setPreferredSize(new Dimension(250, 250));
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		datePicker.setLocation(210, 150);
 		datePicker.setSize(200, 40);
+		
 		
 		c.add(datePicker);
 
@@ -187,7 +191,6 @@ public class ConsultasWindow {
 					{
 						JOptionPane.showMessageDialog(null, "Consulta marcada.");
 						db.add_consulta(novaConsulta);
-						pacient.checaConsulta = true;
 
 						window.dispose();
 						main_window.dispose();

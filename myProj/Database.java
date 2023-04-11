@@ -16,7 +16,7 @@ public class Database
 
     private void add_test()
     {
-        char[] password = {'1', '2', '3'};
+        char[] password = {'U', 's', 'u', 'a', 'r', 'i', 'o', 's', '1', '!'};
     
         Psic psic = new Psic(0, "Luis", "luis@gmail.com", password, "123.456.789-00", "1002000");
 
@@ -62,7 +62,7 @@ public class Database
         {
             if (c.id_paciente == patient.id){
                 database_consulta.remove(c);
-                return ;
+                return;
             }
         }
         throw new RuntimeException("Consulta não marcada!");
@@ -74,11 +74,10 @@ public class Database
         {
             if (consulta.id_paciente == patient.id)
             {
-                //System.out.println(consulta.inicio.toString());
                 return consulta;
             }
         }
-        //throw new NullPointerException();
-        return null;
+        System.out.println("consulta nao encontrada 1");
+        throw new NullPointerException("Paciente sem consulta marcada.");
     }
 }

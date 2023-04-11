@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.Arrays;
+import myProj.exceptions.CPFInvalidException;
+import myProj.exceptions.CRPInvalidException;
+import myProj.exceptions.EmailInvalideException;
+import myProj.exceptions.NameInvalidException;
+import myProj.exceptions.PasswordInvalidException;
 
 public class Login
 {
@@ -200,19 +205,31 @@ public class Login
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent){
-                    String name = nameInput.getText();
-                    String email = emailInput.getText();
-                    String cpf = cpfInput.getText();
-                    String crp = crpInput.getText();
-                    char[] password = passwordInput.getPassword();
+                    try {
+                        String name = nameInput.getText();
+                        String email = emailInput.getText();
+                        String cpf = cpfInput.getText();
+                        String crp = crpInput.getText();
+                        char[] password = passwordInput.getPassword();
+
+                        User new_psic = new Psic(db.autoinc_user, name, email, password, cpf, crp);
+
+                        db.add_user(new_psic);
+                        JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
+                        window.dispose();
+                        main_window.setVisible(true);
+                    } catch (NameInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (CPFInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (CRPInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (EmailInvalideException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (PasswordInvalidException e){
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
                     
-                    User new_psic = new Psic(db.autoinc_user, name, email, password, cpf, crp);
-
-                    db.add_user(new_psic);
-                    JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
-                    window.dispose();
-                    main_window.setVisible(true);
-
                 }
             });
 
@@ -333,17 +350,28 @@ public class Login
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    String name = nameInput.getText();
-                    String email = emailInput.getText();
-                    String cpf = cpfInput.getText();
-                    char[] password = passwordInput.getPassword();
-
-                    User new_patient = new Patient(db.autoinc_user, name, email, password, cpf);
-
-                    db.add_user(new_patient);
-                    JOptionPane.showMessageDialog(null, "Paciente Cadastrado!");
-                    window.dispose();
-                    main_window.setVisible(true);
+                    try {
+                        String name = nameInput.getText();
+                        String email = emailInput.getText();
+                        String cpf = cpfInput.getText();
+                        char[] password = passwordInput.getPassword();
+    
+                        User new_patient = new Patient(db.autoinc_user, name, email, password, cpf);
+    
+                        db.add_user(new_patient);
+                        JOptionPane.showMessageDialog(null, "Paciente Cadastrado!");
+                        window.dispose();
+                        main_window.setVisible(true);
+                        
+                    } catch (NameInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (CPFInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (EmailInvalideException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    } catch (PasswordInvalidException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
 
                 }
             });

@@ -1,18 +1,19 @@
 package myProj;
 
 import java.util.ArrayList;
+import myProj.exceptions.CPFInvalidException;
+import myProj.exceptions.EmailInvalideException;
+import myProj.exceptions.NameInvalidException;
+import myProj.exceptions.PasswordInvalidException;
 
 public class Patient extends User
 {
     int psic_id;
-    Boolean checaConsulta;
     ArrayList<Record> records;
     
-    public Patient(int id, String name, String email, char[] password, String cpf)
-    {
+    public Patient(int id, String name, String email, char[] password, String cpf)throws NameInvalidException, CPFInvalidException, EmailInvalideException, PasswordInvalidException{
         super(id, name, email, password, cpf);
 
-        this.checaConsulta = false;
         this.records = new ArrayList<Record>();
         this.psic_id = -1;
     }

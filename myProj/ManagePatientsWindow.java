@@ -57,7 +57,6 @@ public class ManagePatientsWindow {
             title.setLocation(0, 10);
             c.add(title);
 
-            int numPatients = psicologo.patient_list.size();
             int altura = 70;
 
             checaConsulta = new JLabel("");
@@ -83,21 +82,25 @@ public class ManagePatientsWindow {
                 proxConsulta.setSize(350, 30);
                 proxConsulta.setLocation(30, altura + 60);
 
-                Boolean temConsulta = patient.checaConsulta;
+                //Boolean temConsulta = patient.checaConsulta;
 
-                if (!temConsulta) {
-                    checaConsulta = new JLabel("Paciente sem consulta marcada.");
-                    checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
-                    checaConsulta.setSize(350, 30);
-                    checaConsulta.setLocation(175, altura + 60);
-                } else {
+                JLabel checaConsulta;
+                JButton consultaButton;
+                String horarioConsultaString = "";
+                Boolean marcado = false;
+                try {
                     Consulta consultaPaciente = db.checa_consulta(patient);
                     Date horarioConsulta = consultaPaciente.inicio;
                     String pattern = "dd/MM/yyyy à's' HH:mm";
                     SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
-                    String horarioConsultaString = dataFormato.format(horarioConsulta);
+                    horarioConsultaString = dataFormato.format(horarioConsulta);
+                    marcado = true;
+                } catch (NullPointerException e) {
+                    System.out.println("consulta nao encontrada 4");
+                    horarioConsultaString = e.getMessage();
 
-                    System.out.println(horarioConsultaString);
+                } finally {
+                    System.out.println("consulta nao encontrada 10");
                     checaConsulta = new JLabel(horarioConsultaString);
                     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
                     checaConsulta.setSize(350, 30);
@@ -105,8 +108,7 @@ public class ManagePatientsWindow {
                 }
 
                 // Marcar consulta
-
-                if (db.checa_consulta(patient) == null) {
+                if (!marcado) {
                     JButton consultaBotao = new JButton("Marcar consulta");
                     consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
                     consultaBotao.setSize(110, 30);
@@ -131,7 +133,6 @@ public class ManagePatientsWindow {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
                             try {
-                                patient.checaConsulta = false;
                                 db.desmarca_consulta(db.checa_consulta(patient), patient);
 
                                 JOptionPane.showMessageDialog(null, "Consulta desmarcada.");
@@ -243,11 +244,7 @@ public class ManagePatientsWindow {
 
                             JOptionPane.showMessageDialog(null, "Paciente " + patient.name + " vinculado.");
                             window.dispose();
-                            Menu menu = new Menu(main_window, psicologo, db); // Recebe como janela pai o menu antigo
-                                                                              // (não
-                                                                              // atualizado), por isso, ao fechar, abre
-                                                                              // o
-                                                                              // menu desatualizado.
+                            Menu menu = new Menu(main_window, psicologo, db); 
                         }
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(null, "Digite o ID corretamente");
