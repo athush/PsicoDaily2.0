@@ -2,6 +2,7 @@ package myProj;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import myProj.exceptions.TimeInvalidException;
 import java.util.ArrayList;
 
 public class Consulta {
@@ -24,8 +25,23 @@ public class Consulta {
     public boolean checkHorario(ArrayList<Consulta> consultas, Date ini, Date fin) {
         for(Consulta consulta : consultas) {
             if(consulta.id_paciente == this.id_paciente && consulta.id_psicologo == this.id_psicologo) {
-                //checar se o horário bate
                 if(this.batendo(ini, fin, consulta)) return false;
+            }
+            if (consulta.id_psicologo == this.id_psicologo)
+            {
+                int marcadaHoraInicio = consulta.inicio.getHours();
+                int marcadaHoraFim = consulta.termino.getHours();
+                int novaHoraInicio = ini.getHours();
+                int novaHoraFim = fin.getHours();
+
+                if (consulta.inicio.getDay() == ini.getDay())
+                {
+                    if (marcadaHoraInicio < novaHoraFim && marcadaHoraFim > novaHoraInicio)
+                    {
+                        // throw new TimeInvalidException("Horário já reservado.");
+                        return false;
+                    }
+                }
             }
         }
         return true;

@@ -187,9 +187,16 @@ public class ConsultasWindow {
 					}  
 
 					boolean horaValida = novaConsulta.setHorario(selectedDate, horarioDataInicio, horarioDataFim, db.database_consulta);
+
+					
 					if (horaValida)
 					{
 						JOptionPane.showMessageDialog(null, "Consulta marcada.");
+
+						System.out.println(novaConsulta.inicio);
+						// novaConsulta.horariosConflitantes(db.database_consulta, novaConsulta.inicio);
+
+
 						db.add_consulta(novaConsulta);
 
 						window.dispose();
