@@ -24,31 +24,47 @@ public class Consulta {
 
     public boolean checkHorario(ArrayList<Consulta> consultas, Date ini, Date fin) {
         for(Consulta consulta : consultas) {
-            if(consulta.id_paciente == this.id_paciente && consulta.id_psicologo == this.id_psicologo) {
-                if(this.batendo(ini, fin, consulta)) return false;
-            }
-            if (consulta.id_psicologo == this.id_psicologo)
+            try 
             {
-                int marcadaHoraInicio = consulta.inicio.getHours();
-                int marcadaHoraFim = consulta.termino.getHours();
-                int novaHoraInicio = ini.getHours();
-                int novaHoraFim = fin.getHours();
-
-                if (consulta.inicio.getDay() == ini.getDay())
+                if (consulta.id_psicologo == this.id_psicologo)
                 {
-                    if (marcadaHoraInicio < novaHoraFim && marcadaHoraFim > novaHoraInicio)
+                    String horasMarcada = Integer.toString(consulta.inicio.getHours());
+                    String minutosMarcada = Integer.toString(consulta.inicio.getMinutes());
+                    if (minutosMarcada.equals("0"))
+                        minutosMarcada = "00";
+                    String horarioInicioMarcada = horasMarcada + minutosMarcada;
+    
+                    String horasNova = Integer.toString(ini.getHours());
+                    String minutosNova = Integer.toString(ini.getMinutes());
+                    if (minutosNova.equals("0"))
+                        minutosNova = "00";
+                    String horarioInicioNova = horasNova + minutosNova;
+                    int horarioMarcada = Integer.parseInt(horarioInicioMarcada);
+                    int horarioNova = Integer.parseInt(horarioInicioNova);
+
+                    if (consulta.inicio.getDay() == ini.getDay())
                     {
-                        // throw new TimeInvalidException("Horário já reservado.");
-                        return false;
+                        int diferencaHoras = Math.max(horarioMarcada, horarioNova) - Math.min(horarioMarcada, horarioNova);
+                        if (diferencaHoras < 100)
+                        {
+                            throw new TimeInvalidException("Horário já reservado.");
+                        }
                     }
                 }
+            } 
+            catch (TimeInvalidException e)
+            {
+                throw new TimeInvalidException("Horário já reservado.");
+            }
+            catch (Exception e)
+            {
+                throw new TimeInvalidException("Formato de hora errado.");
             }
         }
         return true;
     }
 
-    public boolean setHorario(Date dia, String horario_inicio, String horario_fim, ArrayList<Consulta> consultas) {
-        // retorna false se deu errado       
+    public boolean setHorario(Date dia, String horario_inicio, String horario_fim, ArrayList<Consulta> consultas) {    
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         String toDate = f.format(dia);
         
@@ -63,8 +79,9 @@ public class Consulta {
         }
         catch (Exception e) 
         {
-            System.out.println("Horário inválido");
-            return false;
+            throw new TimeInvalidException("Formato errado.");
+            // System.out.println("Formato horario inválido");
+            // return false;
         }
         
         if(checkHorario(consultas, date_inicio, date_termino)) 
@@ -73,7 +90,9 @@ public class Consulta {
             this.termino = date_termino;
             return true;
         }
-        return false;
+        else {
+            throw new TimeInvalidException("Horário já reservado.");
+        }
     }
 
     public String getHorario()

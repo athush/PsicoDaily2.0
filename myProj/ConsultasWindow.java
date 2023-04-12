@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.awt.event.*;
 import java.nio.channels.SelectableChannel;
+import myProj.exceptions.TimeInvalidException;
 import java.awt.*;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
@@ -155,59 +156,49 @@ public class ConsultasWindow {
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-				Date now = new Date();
-				Date selectedDate = (Date) datePicker.getModel().getValue();
-        
-				if (selectedDate.compareTo(now) <= 0)
-				{
-					System.out.println("");
-					JOptionPane.showMessageDialog(null, "Data inválida!");
-					
-				}
-				else
-				{
-					String horaInicio = horasInicio.getSelectedItem().toString();
-					String minutoInicio = minutosInicio.getSelectedItem().toString();
-
-					Consulta novaConsulta = new Consulta(pacient.id, psicologo.id, -1);
-
-					String horarioDataInicio = horaInicio + ":" + minutoInicio;
-					
-					// Encontrando horário de fim
-					int aux = Integer.parseInt(horaInicio) + 1;
-					String horarioDataFim = "";
-					
-					if (aux < 10)
+				try {
+					Date now = new Date();
+					Date selectedDate = (Date) datePicker.getModel().getValue();
+			
+					if (selectedDate.compareTo(now) <= 0)
 					{
-						horarioDataFim = "0" + String.valueOf(aux) + ":" + minutoInicio;
+						System.out.println("");
+						JOptionPane.showMessageDialog(null, "Data inválida!");
+						
 					}
 					else
 					{
-						horarioDataFim = String.valueOf(aux) + ":" + minutoInicio;
-					}  
+						String horaInicio = horasInicio.getSelectedItem().toString();
+						String minutoInicio = minutosInicio.getSelectedItem().toString();
+	
+						Consulta novaConsulta = new Consulta(pacient.id, psicologo.id, -1);
+	
+						String horarioDataInicio = horaInicio + ":" + minutoInicio;
+						
+						// Encontrando horário de fim
+						int aux = Integer.parseInt(horaInicio) + 1;
+						String horarioDataFim = "";
+						
+						if (aux < 10)
+						{
+							horarioDataFim = "0" + String.valueOf(aux) + ":" + minutoInicio;
+						}
+						else
+						{
+							horarioDataFim = String.valueOf(aux) + ":" + minutoInicio;
+						}  
 
-					boolean horaValida = novaConsulta.setHorario(selectedDate, horarioDataInicio, horarioDataFim, db.database_consulta);
-
-					
-					if (horaValida)
-					{
-						JOptionPane.showMessageDialog(null, "Consulta marcada.");
-
-						System.out.println(novaConsulta.inicio);
-						// novaConsulta.horariosConflitantes(db.database_consulta, novaConsulta.inicio);
-
-
+						novaConsulta.setHorario(selectedDate, horarioDataInicio, horarioDataFim, db.database_consulta);
 						db.add_consulta(novaConsulta);
 
+						JOptionPane.showMessageDialog(null, "Consulta marcada.");
 						window.dispose();
 						main_window.dispose();
 						ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
-						// main_window.setVisible(true);
 					}
-					else 
-					{
-						JOptionPane.showMessageDialog(null, "Horário inválido!");
-					}
+				} 
+				catch (TimeInvalidException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
             }
         });
