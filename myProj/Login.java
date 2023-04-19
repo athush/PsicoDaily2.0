@@ -208,6 +208,7 @@ public class Login
                     try {
                         String name = nameInput.getText();
                         String email = emailInput.getText();
+                        db.email_cadastrado(email);
                         String cpf = cpfInput.getText();
                         String crp = crpInput.getText();
                         char[] password = passwordInput.getPassword();
@@ -218,17 +219,22 @@ public class Login
                         JOptionPane.showMessageDialog(null, "Psicólogo Cadastrado!");
                         window.dispose();
                         main_window.setVisible(true);
-                    } catch (NameInvalidException e) {
+                    } catch (NullPointerException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (CPFInvalidException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (CRPInvalidException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (EmailInvalideException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (PasswordInvalidException e){
+                    } catch (RuntimeException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
+                    // } catch (NameInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (CPFInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (CRPInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (EmailInvalideException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (PasswordInvalidException e){
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // }
                     
                 }
             });
@@ -353,9 +359,10 @@ public class Login
                     try {
                         String name = nameInput.getText();
                         String email = emailInput.getText();
+                        db.email_cadastrado(email);
                         String cpf = cpfInput.getText();
                         char[] password = passwordInput.getPassword();
-    
+
                         User new_patient = new Patient(db.autoinc_user, name, email, password, cpf);
     
                         db.add_user(new_patient);
@@ -363,15 +370,21 @@ public class Login
                         window.dispose();
                         main_window.setVisible(true);
                         
-                    } catch (NameInvalidException e) {
+                    } catch (NullPointerException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (CPFInvalidException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (EmailInvalideException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    } catch (PasswordInvalidException e) {
+                    } catch (RuntimeException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
+                    
+                    // catch (NameInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (CPFInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (EmailInvalideException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // } catch (PasswordInvalidException e) {
+                    //     JOptionPane.showMessageDialog(null, e.getMessage());
+                    // }
 
                 }
             });

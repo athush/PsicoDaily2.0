@@ -214,30 +214,6 @@ public class Menu
             checaConsulta.setSize(350, 30);
             checaConsulta.setLocation(195, 175);
             c.add(checaConsulta);
-            
-
-            // if (!temConsulta)
-            // {
-            //     checaConsulta = new JLabel("Consulta não marcada.");
-            //     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
-            //     checaConsulta.setSize(350, 30);
-            //     checaConsulta.setLocation(195, 175);
-            // }
-            // else {
-            //     Consulta consultaPaciente = db.checa_consulta(patient);
-            //     Date horarioConsulta = consultaPaciente.inicio;
-            //     String pattern = "dd/MM/yyyy à's' HH:mm";
-            //     SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
-            //     String horarioConsultaString = dataFormato.format(horarioConsulta);
-
-            //     checaConsulta = new JLabel(horarioConsultaString);
-            //     checaConsulta.setFont(new Font("Arial", Font.PLAIN, 18));
-            //     checaConsulta.setSize(350, 30);
-            //     checaConsulta.setLocation(195, 175);
-            // }
-
-            // c.add(checaConsulta);
-
 
             // Create records
 
@@ -297,7 +273,6 @@ public class Menu
                     main_window.setVisible(true);
                 }
             });
-
 
             window.add(jPanel);
             window.setVisible(true);

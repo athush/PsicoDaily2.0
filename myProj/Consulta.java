@@ -70,8 +70,7 @@ public class Consulta {
         
         Date date_inicio, date_termino;
 
-        try 
-        {    
+        try {    
             SimpleDateFormat aux = new SimpleDateFormat("HH:mm dd-MM-yyyy");
             
             date_inicio = aux.parse(horario_inicio + " " + toDate);
@@ -80,8 +79,6 @@ public class Consulta {
         catch (Exception e) 
         {
             throw new TimeInvalidException("Formato errado.");
-            // System.out.println("Formato horario inválido");
-            // return false;
         }
         
         if(checkHorario(consultas, date_inicio, date_termino)) 

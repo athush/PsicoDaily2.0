@@ -1,40 +1,18 @@
 package myProj;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.event.*;
-import java.nio.channels.SelectableChannel;
 import myProj.exceptions.TimeInvalidException;
 import java.awt.*;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 
-import java.sql.*;
 import java.util.*;
-import java.util.Calendar;
 import java.util.Date;
 import org.jdatepicker.impl.*;
-import org.jdatepicker.util.*;
-import org.jdatepicker.*;
 
 public class ConsultasWindow {
     
     public Boolean isClosed = false;
     JFrame window = new JFrame();
-
-    private String dates[]
-		= { "01", "02", "03", "04", "05",
-			"06", "07", "08", "09", "10",
-			"11", "12", "13", "14", "15",
-			"16", "17", "18", "19", "20",
-			"21", "22", "23", "24", "25",
-			"26", "27", "28", "29", "30",
-			"31" };
-	private String months[]
-		= { "01", "02", "03", "04",
-			"05", "06", "07", "08",
-			"09", "10", "11", "12" };
-	private String years[]
-		= { "2023", "2024", "2025" };
 
 	private String hours[]
 	= { "06", "07", "08", "09", "10",
@@ -47,15 +25,8 @@ public class ConsultasWindow {
 
     private JLabel title;
     private JLabel dataLabel;
-    private JComboBox date;
-    private JComboBox month;
-    private JComboBox year;
 	private JComboBox horasInicio;
     private JComboBox minutosInicio;
-	private JComboBox horasFim;
-    private JComboBox minutosFim;
-    private JLabel add;
-    private JTextArea tadd;
     private JButton returnButton;
     private JButton confirmButton;
 

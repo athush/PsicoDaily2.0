@@ -29,17 +29,26 @@ public class Database
         database_user.add(patient2);
     }
 
+    public void email_cadastrado(String email){
+        for (User user_atual : database_user){
+            if (email.equals(user_atual.email)){
+                throw new NullPointerException("E-mail já cadastrado");
+            } 
+        }
+    }
+
     public User get_user(String email)
     {        
         for (User user_atual : database_user){
-            if (email.equals(user_atual.email))
+            if (email.equals(user_atual.email)){
                 return user_atual;
+            }  
         }
-
         throw new NullPointerException("Usuário não existe!");
+        
     }
 
-    public User     get_user(int id) {
+    public User get_user(int id) {
         for (User user_atual : database_user) {
             if (id == user_atual.id)
                 return user_atual;
@@ -80,7 +89,6 @@ public class Database
                 return consulta;
             }
         }
-        System.out.println("consulta nao encontrada 1");
         throw new NullPointerException("Paciente sem consulta marcada.");
     }
 }

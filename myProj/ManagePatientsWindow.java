@@ -15,9 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 
 public class ManagePatientsWindow {
     public boolean isClosed = false;
@@ -25,10 +23,7 @@ public class ManagePatientsWindow {
 
     private Container c;
     private JLabel title;
-    private JLabel record_title_label;
-    private JTextField record_title;
     private JLabel checaConsulta;
-    private JTextArea record_body;
     private JButton submitButton;
     private JButton returnButton;
 
@@ -49,6 +44,7 @@ public class ManagePatientsWindow {
         ;
         c.setLayout(null);
 
+        checaConsulta = new JLabel("");
         // Exibir Pacientes
         if (type == 1) {
             title = new JLabel("Pacientes", JLabel.CENTER);
@@ -58,8 +54,6 @@ public class ManagePatientsWindow {
             c.add(title);
 
             int altura = 70;
-
-            checaConsulta = new JLabel("");
 
             for (Patient patient : psicologo.patient_list) {
                 JLabel name = new JLabel("Nome: " + patient.name);
@@ -85,7 +79,7 @@ public class ManagePatientsWindow {
                 //Boolean temConsulta = patient.checaConsulta;
 
                 JLabel checaConsulta;
-                JButton consultaButton;
+                //JButton consultaButton;
                 String horarioConsultaString = "";
                 Boolean marcado = false;
                 try {
@@ -96,7 +90,6 @@ public class ManagePatientsWindow {
                     horarioConsultaString = dataFormato.format(horarioConsulta);
                     marcado = true;
                 } catch (NullPointerException e) {
-                    System.out.println("consulta nao encontrada 4");
                     horarioConsultaString = e.getMessage();
 
                 } finally {
@@ -251,6 +244,8 @@ public class ManagePatientsWindow {
 
                     } catch (NullPointerException e){
                         JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+                    } catch (ClassCastException e){
+                        JOptionPane.showMessageDialog(null, "Usuário Inválido.");
                     }
                 }
             });
