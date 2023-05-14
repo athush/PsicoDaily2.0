@@ -88,7 +88,7 @@ public class Consulta {
             return true;
         }
         else {
-            throw new TimeInvalidException("Horário já reservado.");
+            throw new TimeInvalidException("Horário já reservado.");    
         }
     }
 

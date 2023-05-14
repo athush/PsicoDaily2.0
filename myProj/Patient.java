@@ -15,7 +15,7 @@ public class Patient extends User
         super(id, name, email, password, cpf);
 
         this.records = new ArrayList<Record>();
-        this.psic_id = -1;
+        this.psic_id = 0;
     }
 
     @Override
