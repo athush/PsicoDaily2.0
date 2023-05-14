@@ -15,7 +15,7 @@ public class Patient extends User
         super(id, name, email, password, cpf);
 
         this.records = new ArrayList<Record>();
-        this.psic_id = 0;
+        this.psic_id = -1;
     }
 
     @Override
@@ -29,19 +29,14 @@ public class Patient extends User
         return dados;
     }
 
-    public boolean addRecord(String title, String text, int id)
+    public void addRecord(Record newRecord)
     {
-        Record newRecord = new Record(title, text, id);
-
-        return records.add(newRecord);
+        records.add(newRecord);
     }
 
-    public boolean editRecord(String title, String text, int id)
+    public void editRecord(Record newRecord)
     {
-        Record newRecord = new Record(title, text, id);
-
-        records.set(id - 1, newRecord);
-        return true;
+        records.set(newRecord.getId() - 1, newRecord);
     }
 
     public void setPsico(int id){

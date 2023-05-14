@@ -2,6 +2,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "/home/athus/Downloads/jdatepicker-1.3.4.jar",
-        "d:\\Material CC\\Trabalhos\\Bibliotecas Java\\jdatepicker-1.3.4.jar"
+        "d:\\Material CC\\Trabalhos\\Bibliotecas Java\\jdatepicker-1.3.4.jar",
+        "/mnt/c/Users/athus/Faculdade/Faculdade/4 periodo/Programação 2/jdatepicker-1.3.4.jar"
     ]
 }

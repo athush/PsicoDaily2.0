@@ -10,7 +10,7 @@ Repositorio para projeto da disciplina de Projeto de Software.
 
 ### Bad Smells identificados
 
-1. Long parameter: Patient, addRecord, editRecord. Todos eles deveriam receber um Record.
+1. Introduce Parameter Object: Patient, addRecord, editRecord. Todos eles deveriam receber um Record. ✅
 2. Duplicated coding
 3. Introduce null pointer
 4. Command

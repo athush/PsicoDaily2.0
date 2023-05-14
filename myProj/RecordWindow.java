@@ -107,7 +107,10 @@ public class RecordWindow
                         String title = record_title.getText();
                         String text = record_body.getText();
                         int numRecords = patient.records.size();
-                        patient.addRecord(title, text, numRecords + 1);
+
+                        Record newRecord = new Record(title, text, numRecords + 1);
+
+                        patient.addRecord(newRecord);
                         
                         JOptionPane.showMessageDialog(null, "Registro feito com sucesso.");
                         window.dispose();
@@ -304,7 +307,9 @@ public class RecordWindow
                         String title = record_title.getText();
                         String text = record_body.getText();
 
-                        patient.editRecord(title, text, index);
+                        Record newRecord = new Record(title, text, index);
+
+                        patient.editRecord(newRecord);
                         
                         JOptionPane.showMessageDialog(null, "Registro editado com sucesso.");
                         window.dispose();

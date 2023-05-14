@@ -41,10 +41,10 @@ public class ManagePatientsWindow {
         window.setLayout(new BoxLayout(window, BoxLayout.PAGE_AXIS));
 
         c = window.getContentPane();
-        ;
         c.setLayout(null);
 
         checaConsulta = new JLabel("");
+        
         // Exibir Pacientes
         if (type == 1) {
             title = new JLabel("Pacientes", JLabel.CENTER);

@@ -28,7 +28,7 @@ class MyFrame implements ActionListener
 		window = new JFrame();
         
         window.setTitle("Home");
-		window.setBounds(650, 200, 600, 400);
+		window.setBounds(700, 200, 600, 400);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
         
