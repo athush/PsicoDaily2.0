@@ -9,10 +9,11 @@ import java.util.*;
 import java.util.Date;
 import org.jdatepicker.impl.*;
 
-public class ConsultasWindow {
+public class ConsultasWindow implements Command{
     
     public Boolean isClosed = false;
     JFrame window = new JFrame();
+	Invoker invoker = new Invoker();
 
 	private String hours[]
 	= { "06", "07", "08", "09", "10",
@@ -30,9 +31,19 @@ public class ConsultasWindow {
     private JButton returnButton;
     private JButton confirmButton;
 
+	JFrame main_window;
+	Patient patient;
+	Psic psicologo;
+	Database db;
+
+	public ConsultasWindow(JFrame main_window, Patient patient, Psic psicologo, Database db){
+		this.main_window = main_window;
+		this.patient = patient;
+		this.psicologo = psicologo;
+		this.db = db;
+	}
     
-    public ConsultasWindow(int type, JFrame main_window, Patient pacient, Psic psicologo, Database db) 
-    {
+    public void execute() {
         window.addWindowListener(new WindowAdapter() 
         {
             public void windowClosing(WindowEvent windowEvent)
@@ -43,7 +54,7 @@ public class ConsultasWindow {
         }); 
 
         window.setTitle("Consultas");
-		window.setBounds(650, 200, 600, 400);
+		window.setBounds(650, 200, 700, 500);
 		window.setResizable(false);
 
         Container c = window.getContentPane();
@@ -142,7 +153,7 @@ public class ConsultasWindow {
 						String horaInicio = horasInicio.getSelectedItem().toString();
 						String minutoInicio = minutosInicio.getSelectedItem().toString();
 	
-						Consulta novaConsulta = new Consulta(pacient.id, psicologo.id, -1);
+						Consulta novaConsulta = new Consulta(patient.id, psicologo.id, -1);
 	
 						String horarioDataInicio = horaInicio + ":" + minutoInicio;
 						
@@ -165,7 +176,9 @@ public class ConsultasWindow {
 						JOptionPane.showMessageDialog(null, "Consulta marcada.");
 						window.dispose();
 						main_window.dispose();
-						ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
+						Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
+						invoker.setCommand(managePatientsWindow);
+						invoker.executeCommand();
 					}
 				} 
 				catch (TimeInvalidException e) {

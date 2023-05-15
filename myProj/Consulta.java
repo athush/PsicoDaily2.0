@@ -15,13 +15,6 @@ public class Consulta {
         this.id_consulta = id_consulta;
     }
 
-    public boolean batendo(Date ini, Date fin, Consulta consulta) {
-        boolean inicioOverlapping = ini.compareTo(consulta.inicio) >= 0 && ini.compareTo(consulta.termino) < 0;
-        boolean terminoOverlapping = fin.compareTo(consulta.inicio) > 0 && fin.compareTo(consulta.termino) <= 0;
-        
-        return (inicioOverlapping || terminoOverlapping);
-    }
-
     public boolean checkHorario(ArrayList<Consulta> consultas, Date ini, Date fin) {
         for(Consulta consulta : consultas) {
             try 
