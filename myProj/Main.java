@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 class MyFrame implements ActionListener 
 {
+
 	// Components of the Form
 	private JFrame window;
     private Container c;
@@ -20,6 +21,7 @@ class MyFrame implements ActionListener
     private JButton register;
     private JButton sair;
     private JButton exibir;
+    Invoker invoker = new Invoker();
 
 	public MyFrame()
 	{
@@ -28,7 +30,7 @@ class MyFrame implements ActionListener
 		window = new JFrame();
         
         window.setTitle("Home");
-		window.setBounds(700, 200, 600, 400);
+		window.setBounds(700, 200, 700, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
         
@@ -53,7 +55,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(1, window, db);
+                Command login = new Login();
+                invoker.setCommand(login);
+                invoker.executeCommand(window, db, null);
                 
                 window.setVisible(false);
             }
@@ -78,7 +82,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(2, window, db);
+                Command registerPsic = new RegisterPsic();
+                invoker.setCommand(registerPsic);
+                invoker.executeCommand(window, db, null);
                 
                 window.setVisible(false);
             }
@@ -96,7 +102,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Login login_window = new Login(3, window, db);
+                Command registerPatient = new RegisterPatient();
+                invoker.setCommand(registerPatient);
+                invoker.executeCommand(window, db, null);
                 
                 window.setVisible(false);
             }
@@ -128,8 +136,9 @@ class MyFrame implements ActionListener
         exibir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ManagePatientsWindow telaUsuarios = new ManagePatientsWindow(3, window, db, null);
-                //db.exibir_usuarios();
+                Command profileWindow = new ProfileWindow();
+                invoker.setCommand(profileWindow);
+                invoker.executeCommand(window, db, null);
             }
         });
 

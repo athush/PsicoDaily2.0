@@ -13,6 +13,7 @@ public class ConsultasWindow {
     
     public Boolean isClosed = false;
     JFrame window = new JFrame();
+	Invoker invoker = new Invoker();
 
 	private String hours[]
 	= { "06", "07", "08", "09", "10",
@@ -43,7 +44,7 @@ public class ConsultasWindow {
         }); 
 
         window.setTitle("Consultas");
-		window.setBounds(650, 200, 600, 400);
+		window.setBounds(650, 200, 700, 500);
 		window.setResizable(false);
 
         Container c = window.getContentPane();
@@ -165,7 +166,9 @@ public class ConsultasWindow {
 						JOptionPane.showMessageDialog(null, "Consulta marcada.");
 						window.dispose();
 						main_window.dispose();
-						ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);
+						Command managePatientsWindow = new ManagePatientsWindow();
+						invoker.setCommand(managePatientsWindow);
+						invoker.executeCommand(main_window, db, psicologo);
 					}
 				} 
 				catch (TimeInvalidException e) {
