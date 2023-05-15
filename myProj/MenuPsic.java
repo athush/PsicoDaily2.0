@@ -11,7 +11,17 @@ public class MenuPsic implements Command{
     JFrame window = new JFrame();
     Invoker invoker = new Invoker();
 
-    public void execute(JFrame main_window, Database db, User user)
+    JFrame main_window;
+    Database db;
+    User user;
+
+    public MenuPsic(JFrame main_window, Database db, User user){
+        this.main_window = main_window;
+        this.db = db;
+        this.user = user;
+    }
+
+    public void execute()
     {
         window.addWindowListener(new WindowAdapter() 
         {
@@ -87,9 +97,9 @@ public class MenuPsic implements Command{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                Command managePatientsWindow = new ManagePatientsWindow();
+                Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psic);
                 invoker.setCommand(managePatientsWindow);
-                invoker.executeCommand(main_window, db, psic);
+                invoker.executeCommand();
                 window.dispose();
             }
         });
@@ -104,9 +114,9 @@ public class MenuPsic implements Command{
         link_patients.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Command vincPatient = new VincPatient();
+                Command vincPatient = new VincPatient(main_window, db, psic);
                 invoker.setCommand(vincPatient);
-                invoker.executeCommand(main_window, db, psic);
+                invoker.executeCommand();
                 window.dispose();
             }
         });

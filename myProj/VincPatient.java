@@ -15,12 +15,22 @@ public class VincPatient implements Command{
     private JButton submitButton;
     private JButton returnButton;
 
-    public void execute(JFrame main_window, Database db, User user){
+    JFrame main_window;
+    Database db;
+    User user;
+
+    public VincPatient(JFrame main_window, Database db, User user){
+        this.main_window = main_window;
+        this.db = db;
+        this.user = user;
+    }
+
+    public void execute(){
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
-                Command menuPsic = new MenuPsic();
+                Command menuPsic = new MenuPsic(main_window, db, user);
                 invoker.setCommand(menuPsic);
-                invoker.executeCommand(main_window, db, user);
+                invoker.executeCommand();
                 window.dispose();
             }
         });
@@ -87,9 +97,9 @@ public class VincPatient implements Command{
 
                         JOptionPane.showMessageDialog(null, "Paciente " + patient.name + " vinculado.");
                         window.dispose();
-                        Command menuPsic = new MenuPsic();
+                        Command menuPsic = new MenuPsic(main_window, db, user);
                         invoker.setCommand(menuPsic);
-                        invoker.executeCommand(main_window, db, user);
+                        invoker.executeCommand();
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Digite o ID corretamente");

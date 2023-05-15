@@ -9,8 +9,15 @@ public class RegisterPatient implements Command{
     public Boolean isClosed = false;
     JFrame window = new JFrame();
 
+    JFrame main_window;
+    Database db;
 
-    public void execute(JFrame main_window, Database db, User user){
+    public RegisterPatient(JFrame main_window, Database db){
+        this.main_window = main_window;
+        this.db = db;
+    }
+
+    public void execute(){
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 window.dispose();

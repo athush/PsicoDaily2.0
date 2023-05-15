@@ -23,13 +23,23 @@ public class ManagePatientsWindow implements Command{
     private Container c;
     private JLabel title;
 
-    public void execute(JFrame main_window, Database db, User user) {
+    JFrame main_window;
+    Database db;
+    User user;
+
+    public ManagePatientsWindow(JFrame main_window, Database db, User user){
+        this.main_window = main_window;
+        this.db = db;
+        this.user = user;
+    }
+
+    public void execute() {
         
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
-                Command menuPsic = new MenuPsic();
+                Command menuPsic = new MenuPsic(main_window, db, user);
                 invoker.setCommand(menuPsic);
-                invoker.executeCommand(main_window, db, user);
+                invoker.executeCommand();
                 window.dispose();
             }
         });
@@ -108,7 +118,10 @@ public class ManagePatientsWindow implements Command{
                 consultaBotao.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        ConsultasWindow new_window = new ConsultasWindow(1, main_window, patient, psicologo, db);
+
+                        Command consultasWindow = new ConsultasWindow(window, patient, psicologo, db);
+                        invoker.setCommand(consultasWindow);
+                        invoker.executeCommand();
                         window.setVisible(false);
                     }
                 });
@@ -129,9 +142,9 @@ public class ManagePatientsWindow implements Command{
                             JOptionPane.showMessageDialog(null, "Consulta desmarcada.");
                             window.dispose();
 
-                            Command managePatientsWindow = new ManagePatientsWindow();
+                            Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
                             invoker.setCommand(managePatientsWindow);
-                            invoker.executeCommand(main_window, db, psicologo);
+                            invoker.executeCommand();
                         } catch (RuntimeException e) {
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
@@ -149,11 +162,9 @@ public class ManagePatientsWindow implements Command{
             recordsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Command viewRecord = new ViewRecord();
+                    Command viewRecord = new ViewRecord(main_window, patient);
                     invoker.setCommand(viewRecord);
-                    invoker.executeCommand(main_window, db, patient);
-
-                    //RecordWindow new_window = new RecordWindow(2, window, patient, 0);
+                    invoker.executeCommand();
                     window.setVisible(false);
                 }
             });
@@ -172,9 +183,9 @@ public class ManagePatientsWindow implements Command{
 
                         window.dispose();
                         
-                        Command managePatientsWindow = new ManagePatientsWindow();
+                        Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
                         invoker.setCommand(managePatientsWindow);
-                        invoker.executeCommand(main_window, db, psicologo);
+                        invoker.executeCommand();
                     }
                 }
             });

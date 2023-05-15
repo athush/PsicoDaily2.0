@@ -12,7 +12,15 @@ public class ViewRecord implements Command{
     private Container c;
     private JLabel title;
 
-    public void execute(JFrame main_window, Database db, User user) {
+    JFrame main_window;
+    User user;
+
+    public ViewRecord(JFrame main_window, User user){
+        this.main_window = main_window;
+        this.user = user;
+    }
+
+    public void execute() {
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 window.dispose();
@@ -68,7 +76,10 @@ public class ViewRecord implements Command{
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     window.dispose();
-                    RecordWindow new_window = new RecordWindow(5, main_window, patient, record.getId());
+                    
+                    Command editRecord = new EditRecord(main_window, patient, record.getId());
+                    invoker.setCommand(editRecord);
+                    invoker.executeCommand();
                 }
             });
 
@@ -86,9 +97,9 @@ public class ViewRecord implements Command{
                         patient.records.remove(record);
                         window.dispose();
 
-                        Command viewRecord = new ViewRecord();
+                        Command viewRecord = new ViewRecord(main_window, patient);
                         invoker.setCommand(viewRecord);
-                        invoker.executeCommand(main_window, db, patient);
+                        invoker.executeCommand();
                         //RecordWindow new_window = new RecordWindow(2, main_window, patient, record.getId());
 
                     }

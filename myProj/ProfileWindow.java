@@ -14,13 +14,19 @@ public class ProfileWindow implements Command{
     private JLabel title;
     private JButton returnButton;
 
-    public void execute(JFrame main_window, Database db, User user){
+    JFrame main_window;
+    Database db;
+
+    public ProfileWindow(JFrame main_window, Database db){
+        this.main_window = main_window;
+        this.db = db;
+    }
+
+    public void execute(){
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
-                Command menuPsic = new MenuPsic();
-                invoker.setCommand(menuPsic);
-                invoker.executeCommand(main_window, db, user);
                 window.dispose();
+                main_window.setVisible(true);
             }
         });
 

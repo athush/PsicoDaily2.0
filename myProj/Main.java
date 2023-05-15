@@ -55,9 +55,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Command login = new Login();
+                Command login = new Login(window, db);
                 invoker.setCommand(login);
-                invoker.executeCommand(window, db, null);
+                invoker.executeCommand();
                 
                 window.setVisible(false);
             }
@@ -82,9 +82,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Command registerPsic = new RegisterPsic();
+                Command registerPsic = new RegisterPsic(window, db);
                 invoker.setCommand(registerPsic);
-                invoker.executeCommand(window, db, null);
+                invoker.executeCommand();
                 
                 window.setVisible(false);
             }
@@ -102,9 +102,9 @@ class MyFrame implements ActionListener
             @Override
             public void actionPerformed(ActionEvent actionEvent) 
             {
-                Command registerPatient = new RegisterPatient();
+                Command registerPatient = new RegisterPatient(window, db);
                 invoker.setCommand(registerPatient);
-                invoker.executeCommand(window, db, null);
+                invoker.executeCommand();
                 
                 window.setVisible(false);
             }
@@ -136,9 +136,9 @@ class MyFrame implements ActionListener
         exibir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Command profileWindow = new ProfileWindow();
+                Command profileWindow = new ProfileWindow(window, db);
                 invoker.setCommand(profileWindow);
-                invoker.executeCommand(window, db, null);
+                invoker.executeCommand();
             }
         });
 

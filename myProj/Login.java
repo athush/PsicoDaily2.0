@@ -10,8 +10,15 @@ public class Login implements Command
     public Boolean isClosed = false;
     JFrame window = new JFrame();
     Invoker invoker = new Invoker();
+    JFrame main_window;
+    Database db;
+
+    public Login(JFrame main_window, Database db){
+        this.main_window = main_window;
+        this.db = db;
+    }
     
-    public void execute(JFrame main_window, Database db, User user) 
+    public void execute() 
     {
         window.addWindowListener(new WindowAdapter() 
         {
@@ -84,15 +91,15 @@ public class Login implements Command
 
                     if (compare) {
                         if(found instanceof Psic){
-                            Command menuPsic = new MenuPsic();
+                            Command menuPsic = new MenuPsic(main_window, db, found);
                             invoker.setCommand(menuPsic);
                             
                         }else if(found instanceof Patient){
-                            Command menuPatient = new MenuPatient();
+                            Command menuPatient = new MenuPatient(main_window, db, found);
                             invoker.setCommand(menuPatient);
                         }
                         
-                        invoker.executeCommand(main_window, db, found);
+                        invoker.executeCommand();
                         window.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Senha incorreta!");

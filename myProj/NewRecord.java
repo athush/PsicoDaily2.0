@@ -17,7 +17,15 @@ public class NewRecord implements Command{
     private JButton submitButton;
     private JButton returnButton;
 
-    public void execute(JFrame main_window, Database db, User user){
+    JFrame main_window;
+    User user;
+
+    public NewRecord(JFrame main_window, User user){
+        this.main_window = main_window;
+        this.user = user;
+    }
+
+    public void execute(){
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 window.dispose();

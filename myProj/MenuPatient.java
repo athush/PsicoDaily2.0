@@ -11,7 +11,17 @@ public class MenuPatient implements Command {
     JFrame window = new JFrame();
     Invoker invoker = new Invoker();
 
-    public void execute(JFrame main_window, Database db, User user){
+    JFrame main_window;
+    Database db;
+    User user;
+
+    public MenuPatient(JFrame main_window, Database db, User user){
+        this.main_window = main_window;
+        this.db = db;
+        this.user = user;
+    }
+
+    public void execute(){
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 window.dispose();
@@ -111,9 +121,9 @@ public class MenuPatient implements Command {
         criarRegistros.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Command newRecord = new NewRecord();
+                Command newRecord = new NewRecord(window, patient);
                 invoker.setCommand(newRecord);
-                invoker.executeCommand(window, db, patient);
+                invoker.executeCommand();
                 window.dispose();
             }
         });
@@ -131,9 +141,9 @@ public class MenuPatient implements Command {
         exibirRegistros.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Command viewRecord = new ViewRecord();
+                Command viewRecord = new ViewRecord(window, patient);
                 invoker.setCommand(viewRecord);
-                invoker.executeCommand(window, db, patient);
+                invoker.executeCommand();
 
                 //RecordWindow new_window = new RecordWindow(2, window, patient, 0);
                 window.setVisible(false);

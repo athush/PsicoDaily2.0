@@ -1,7 +1,5 @@
 package myProj;
 
-import javax.swing.*;
-
 public class Invoker {
     private Command command;
 
@@ -9,7 +7,7 @@ public class Invoker {
         this.command = c;
     }
 
-    public void executeCommand(JFrame main_window, Database db, User user) {
-        this.command.execute(main_window, db ,user);
+    public void executeCommand() {
+        this.command.execute();
     }
 }
