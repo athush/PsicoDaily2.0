@@ -165,6 +165,7 @@ public class ManagePatientsWindow {
                         if (resposta == 0) {
                             psicologo.patient_list.remove(patient);
                             patient.psic_id = -1;
+                            patient.updateVinculo();
 
                             window.dispose();
                             ManagePatientsWindow new_window = new ManagePatientsWindow(1, main_window, db, psicologo);

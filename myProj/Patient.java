@@ -9,6 +9,7 @@ import myProj.exceptions.PasswordInvalidException;
 public class Patient extends User
 {
     int psic_id;
+    PatientState vinculo;
     ArrayList<Record> records;
     
     public Patient(int id, String name, String email, char[] password, String cpf)throws NameInvalidException, CPFInvalidException, EmailInvalideException, PasswordInvalidException{
@@ -39,7 +40,22 @@ public class Patient extends User
         records.set(newRecord.getId() - 1, newRecord);
     }
 
+    public void updateVinculo()
+    {
+        if (this.psic_id == -1)
+        {
+            this.vinculo = new PatientNaoVinculadoState();
+            // System.out.println("Sem psico");
+        }
+        else
+        {
+            this.vinculo = new PatientVinculadoState();
+            // System.out.println("Com psico");
+        }
+    }
+
     public void setPsico(int id){
         this.psic_id = id;
+        updateVinculo();
     }
 }
