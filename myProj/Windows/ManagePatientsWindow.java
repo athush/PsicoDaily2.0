@@ -97,7 +97,6 @@ public class ManagePatientsWindow implements Command{
                 horarioConsultaString = e.getMessage();
 
             } finally {
-                System.out.println("consulta nao encontrada 10");
                 checaConsulta = new JLabel(horarioConsultaString);
                 checaConsulta.setFont(new Font("Arial", Font.PLAIN, 16));
                 checaConsulta.setSize(350, 30);
