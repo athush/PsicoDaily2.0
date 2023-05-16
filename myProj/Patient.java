@@ -3,7 +3,6 @@ package myProj;
 import java.util.ArrayList;
 import myProj.exceptions.CPFInvalidException;
 import myProj.exceptions.EmailInvalideException;
-import myProj.exceptions.NameInvalidException;
 import myProj.exceptions.PasswordInvalidException;
 
 public class Patient extends User
@@ -12,7 +11,7 @@ public class Patient extends User
     PatientState vinculo;
     ArrayList<Record> records;
     
-    public Patient(int id, String name, String email, char[] password, String cpf)throws NameInvalidException, CPFInvalidException, EmailInvalideException, PasswordInvalidException{
+    public Patient(int id, String name, String email, char[] password, String cpf) throws  CPFInvalidException, EmailInvalideException, PasswordInvalidException{
         super(id, name, email, password, cpf);
 
         this.records = new ArrayList<Record>();

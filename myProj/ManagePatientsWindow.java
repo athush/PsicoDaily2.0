@@ -13,7 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 public class ManagePatientsWindow implements Command{
     public boolean isClosed = false;
@@ -37,10 +36,10 @@ public class ManagePatientsWindow implements Command{
         
         window.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
+                window.dispose();
                 Command menuPsic = new MenuPsic(main_window, db, user);
                 invoker.setCommand(menuPsic);
                 invoker.executeCommand();
-                window.dispose();
             }
         });
 
@@ -84,10 +83,7 @@ public class ManagePatientsWindow implements Command{
             proxConsulta.setSize(350, 30);
             proxConsulta.setLocation(30, altura + 60);
 
-            //Boolean temConsulta = patient.checaConsulta;
-
             JLabel checaConsulta;
-            //JButton consultaButton;
             String horarioConsultaString = "";
             Boolean marcado = false;
             try {
@@ -136,18 +132,12 @@ public class ManagePatientsWindow implements Command{
                 consultaBotao.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        try {
-                            db.desmarca_consulta(db.checa_consulta(patient), patient);
+                        
+                        window.dispose();
 
-                            JOptionPane.showMessageDialog(null, "Consulta desmarcada.");
-                            window.dispose();
-
-                            Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
-                            invoker.setCommand(managePatientsWindow);
-                            invoker.executeCommand();
-                        } catch (RuntimeException e) {
-                            JOptionPane.showMessageDialog(null, e.getMessage());
-                        }
+                        Command desmarConsulta = new DesmarConsulta(main_window, db, psicologo, patient);
+                        invoker.setCommand(desmarConsulta);
+                        invoker.executeCommand();
                     }
                 });
 
@@ -162,7 +152,7 @@ public class ManagePatientsWindow implements Command{
             recordsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Command viewRecord = new ViewRecord(main_window, patient);
+                    Command viewRecord = new ViewRecord(window, patient);
                     invoker.setCommand(viewRecord);
                     invoker.executeCommand();
                     window.setVisible(false);
@@ -176,17 +166,10 @@ public class ManagePatientsWindow implements Command{
             unlinkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Deseja desvincular " + patient.name + "?");
-                    if (resposta == 0) {
-                        psicologo.patient_list.remove(patient);
-                        patient.psic_id = -1;
-
-                        window.dispose();
-                        
-                        Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
-                        invoker.setCommand(managePatientsWindow);
-                        invoker.executeCommand();
-                    }
+                    Command desvincPatient = new DesvincPatient(main_window, db, psicologo, patient);
+                    invoker.setCommand(desvincPatient);
+                    invoker.executeCommand();
+                    window.dispose();
                 }
             });
 

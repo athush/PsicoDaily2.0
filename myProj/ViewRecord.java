@@ -100,7 +100,6 @@ public class ViewRecord implements Command{
                         Command viewRecord = new ViewRecord(main_window, patient);
                         invoker.setCommand(viewRecord);
                         invoker.executeCommand();
-                        //RecordWindow new_window = new RecordWindow(2, main_window, patient, record.getId());
 
                     }
                 }

@@ -144,8 +144,6 @@ public class MenuPatient implements Command {
                 Command viewRecord = new ViewRecord(window, patient);
                 invoker.setCommand(viewRecord);
                 invoker.executeCommand();
-
-                //RecordWindow new_window = new RecordWindow(2, window, patient, 0);
                 window.setVisible(false);
             }
         });

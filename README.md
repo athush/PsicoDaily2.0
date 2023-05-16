@@ -20,7 +20,7 @@ Todos eles deveriam receber um Record.
 
 3. Introduce null pointer
 
-4. Command
+4. Command ✅
 
 5. State:
 - Vinculo ✅

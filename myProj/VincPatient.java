@@ -72,8 +72,10 @@ public class VincPatient implements Command{
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                Command menuPsic = new MenuPsic(main_window, db, user);
+                invoker.setCommand(menuPsic);
+                invoker.executeCommand();
                 window.dispose();
-                main_window.setVisible(true);
             }
         });
 
