@@ -9,13 +9,16 @@ public class Patient extends User
 {
     int psic_id;
     PatientState vinculo;
+    ConsultaState estadoConsulta;
     ArrayList<Record> records;
     
     public Patient(int id, String name, String email, char[] password, String cpf) throws  CPFInvalidException, EmailInvalideException, PasswordInvalidException{
         super(id, name, email, password, cpf);
 
         this.records = new ArrayList<Record>();
+        this.estadoConsulta = new ConsultaDesmarcada();
         this.psic_id = -1;
+        this.vinculo = new PatientNaoVinculadoState();
     }
 
     @Override

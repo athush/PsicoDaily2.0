@@ -61,6 +61,11 @@ public class Database
         database_user.add(user);
     }
 
+    public void delete_user(User user){
+        autoinc_user--;
+        database_user.remove(user);
+    }
+
     public void add_consulta(Consulta consulta) {
         //so adicione se der true
         consulta.id_consulta = autoinc_consulta;

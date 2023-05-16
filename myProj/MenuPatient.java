@@ -29,10 +29,14 @@ public class MenuPatient implements Command {
             }
         });
 
+        
         Patient patient = (Patient) user;
         window.setTitle("Menu Paciente");
         window.setBounds(650, 200, 700, 500);
         window.setResizable(false);
+        
+        System.out.println("Consulta: " + patient.estadoConsulta.temConsulta());
+        // System.out.println("Vinculo: " + patient.vinculo.estaVinculado());
 
         Container c = window.getContentPane();
         c.setLayout(null);

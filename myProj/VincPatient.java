@@ -91,7 +91,7 @@ public class VincPatient implements Command{
                     int idDigitado = Integer.parseInt(id_text_area.getText());
                     Patient patient = (Patient) db.get_user(idDigitado);
 
-                    if (patient.psic_id != -1) {
+                    if (patient.vinculo.estaVinculado()) {
                         JOptionPane.showMessageDialog(null, "Paciente já possui psicólogo.");
                     } else {
                         patient.setPsico(psicologo.id);

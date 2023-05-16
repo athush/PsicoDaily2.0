@@ -23,6 +23,17 @@ public class DesvincPatient implements Command{
         int resposta = JOptionPane.showConfirmDialog(null, "Deseja desvincular " + patient.name + "?");
         if (resposta == 0) {
             psicologo.patient_list.remove(patient);
+            patient.vinculo = new PatientNaoVinculadoState();
+
+            JOptionPane.showMessageDialog(null, "Paciente desvinculado.");
+
+            if (patient.estadoConsulta.temConsulta())
+            {
+                patient.estadoConsulta = new ConsultaDesmarcada();
+                Command desmarConsulta = new DesmarConsulta(db, patient);
+                invoker.setCommand(desmarConsulta);
+                invoker.executeCommand();
+            }
             patient.psic_id = -1;
         }
         

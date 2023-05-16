@@ -85,14 +85,12 @@ public class ManagePatientsWindow implements Command{
 
             JLabel checaConsulta;
             String horarioConsultaString = "";
-            Boolean marcado = false;
             try {
                 Consulta consultaPaciente = db.checa_consulta(patient);
                 Date horarioConsulta = consultaPaciente.inicio;
                 String pattern = "dd/MM/yyyy à's' HH:mm";
                 SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
                 horarioConsultaString = dataFormato.format(horarioConsulta);
-                marcado = true;
             } catch (NullPointerException e) {
                 horarioConsultaString = e.getMessage();
 
@@ -105,7 +103,7 @@ public class ManagePatientsWindow implements Command{
             }
 
             // Marcar consulta
-            if (!marcado) {
+            if (!patient.estadoConsulta.temConsulta()) {
                 JButton consultaBotao = new JButton("Marcar consulta");
                 consultaBotao.setFont(new Font("Arial", Font.PLAIN, 12));
                 consultaBotao.setSize(110, 30);
@@ -115,7 +113,7 @@ public class ManagePatientsWindow implements Command{
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
 
-                        Command consultasWindow = new ConsultasWindow(window, patient, psicologo, db);
+                        Command consultasWindow = new ConsultasWindow(main_window, patient, psicologo, db);
                         invoker.setCommand(consultasWindow);
                         invoker.executeCommand();
                         window.setVisible(false);
@@ -133,10 +131,12 @@ public class ManagePatientsWindow implements Command{
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         
-                        window.dispose();
-
-                        Command desmarConsulta = new DesmarConsulta(main_window, db, psicologo, patient);
+                        Command desmarConsulta = new DesmarConsulta(db, patient);
                         invoker.setCommand(desmarConsulta);
+                        invoker.executeCommand();
+                        window.dispose();
+                        Command managePatientsWindow = new ManagePatientsWindow(main_window, db, psicologo);
+                        invoker.setCommand(managePatientsWindow);
                         invoker.executeCommand();
                     }
                 });
