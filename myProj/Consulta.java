@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Consulta {
     int id_paciente, id_psicologo, id_consulta;
-    Date inicio, termino;
     TimeInterval intervaloConsulta;
 
     public Consulta(int id_paciente, int id_psicologo, int id_consulta) {

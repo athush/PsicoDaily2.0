@@ -18,13 +18,13 @@ Todos eles deveriam receber um Record.
 
 2. Duplicated coding
 
-3. Introduce null pointer
+3. Introduce parameter object ✅
 
 4. Command ✅
 
 5. State:
 - Vinculo ✅
 - Record ✅
-- Consulta (marcada ou não)
+- Consulta (marcada ou não) ✅
 
 # Entrega: 1 padrão simples e 2 complexos: utilizando herança e polimorfismo
