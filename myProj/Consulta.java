@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class Consulta {
     int id_paciente, id_psicologo, id_consulta;
     Date inicio, termino;
+    TimeInterval intervaloConsulta;
 
     public Consulta(int id_paciente, int id_psicologo, int id_consulta) {
         this.id_paciente = id_paciente;
         this.id_psicologo = id_psicologo;
         this.id_consulta = id_consulta;
+        // this.intervaloConsulta = new TimeInterval(inicio, termino);
     }
 
     public boolean checkHorario(ArrayList<Consulta> consultas, Date ini, Date fin) {
@@ -21,8 +23,9 @@ public class Consulta {
             {
                 if (consulta.id_psicologo == this.id_psicologo)
                 {
-                    String horasMarcada = Integer.toString(consulta.inicio.getHours());
-                    String minutosMarcada = Integer.toString(consulta.inicio.getMinutes());
+                    String horasMarcada = Integer.toString(consulta.intervaloConsulta.dataInicio.getHours());
+                    System.out.println("Horainicio: " + horasMarcada);
+                    String minutosMarcada = Integer.toString(consulta.intervaloConsulta.dataInicio.getMinutes());
                     if (minutosMarcada.equals("0"))
                         minutosMarcada = "00";
                     String horarioInicioMarcada = horasMarcada + minutosMarcada;
@@ -35,7 +38,7 @@ public class Consulta {
                     int horarioMarcada = Integer.parseInt(horarioInicioMarcada);
                     int horarioNova = Integer.parseInt(horarioInicioNova);
 
-                    if (consulta.inicio.getDay() == ini.getDay())
+                    if (consulta.intervaloConsulta.dataInicio.getDay() == ini.getDay())
                     {
                         int diferencaHoras = Math.max(horarioMarcada, horarioNova) - Math.min(horarioMarcada, horarioNova);
                         if (diferencaHoras < 100)
@@ -74,10 +77,12 @@ public class Consulta {
             throw new TimeInvalidException("Formato errado.");
         }
         
+        System.out.println("Checa horario: ");
         if(checkHorario(consultas, date_inicio, date_termino)) 
         {
-            this.inicio = date_inicio;
-            this.termino = date_termino;
+            System.out.println("Checou");
+            this.intervaloConsulta = new TimeInterval(date_inicio, date_termino);
+            // this.intervaloConsulta.dataFim = date_termino;
             return true;
         }
         else {
@@ -87,6 +92,6 @@ public class Consulta {
 
     public String getHorario()
     {
-        return inicio.toString();
+        return intervaloConsulta.dataInicio.toString();
     }
 }

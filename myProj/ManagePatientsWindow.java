@@ -87,7 +87,7 @@ public class ManagePatientsWindow implements Command{
             String horarioConsultaString = "";
             try {
                 Consulta consultaPaciente = db.checa_consulta(patient);
-                Date horarioConsulta = consultaPaciente.inicio;
+                Date horarioConsulta = consultaPaciente.intervaloConsulta.dataInicio;
                 String pattern = "dd/MM/yyyy à's' HH:mm";
                 SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
                 horarioConsultaString = dataFormato.format(horarioConsulta);
@@ -112,9 +112,10 @@ public class ManagePatientsWindow implements Command{
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
 
-                        Command consultasWindow = new ConsultasWindow(main_window, patient, psicologo, db);
+                        Command consultasWindow = new ConsultasWindow(window, patient, psicologo, db);
                         invoker.setCommand(consultasWindow);
                         invoker.executeCommand();
+                        // window.dispose();
                         window.setVisible(false);
                     }
                 });

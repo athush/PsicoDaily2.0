@@ -10,7 +10,7 @@ public class DateLabelFormatter extends AbstractFormatter {
  
     private String datePattern = "dd-MM-yyyy";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-     
+    
     @Override
     public Object stringToValue(String text) throws ParseException {
         return dateFormatter.parseObject(text);

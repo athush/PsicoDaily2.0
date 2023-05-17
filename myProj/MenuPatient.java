@@ -102,7 +102,7 @@ public class MenuPatient implements Command {
         String horarioConsultaString = "";
         try {
             Consulta consultaPaciente = db.checa_consulta(patient);
-            Date horarioConsulta = consultaPaciente.inicio;
+            Date horarioConsulta = consultaPaciente.intervaloConsulta.dataInicio;
             String pattern = "dd/MM/yyyy à's' HH:mm";
             SimpleDateFormat dataFormato = new SimpleDateFormat(pattern);
             horarioConsultaString = dataFormato.format(horarioConsulta);
