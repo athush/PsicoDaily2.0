@@ -17,6 +17,7 @@ public class Patient extends User
 
         this.records = new ArrayList<Record>();
         this.psic_id = -1;
+        this.existeRegistro = new nRegistroState();
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ViewRecord implements Command{
         int numRegistros = patient.records.size();
         int altura = 70;
 
-        if (patient.updateRegistro())
+        if (patient.existeRegistro.existeRegistro())
         {
             for (int i = 0; i < numRegistros; i++) 
             {

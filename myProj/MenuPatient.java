@@ -34,6 +34,8 @@ public class MenuPatient implements Command {
         window.setBounds(650, 200, 700, 500);
         window.setResizable(false);
 
+        System.out.println("Tem registro: " + patient.existeRegistro.existeRegistro());
+
         Container c = window.getContentPane();
         c.setLayout(null);
 

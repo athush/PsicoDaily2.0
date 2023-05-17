@@ -1,6 +1,6 @@
 package myProj;
 
-public class nRegistroState implements RecordState {
+public class sRegistroState implements RecordState {
     public boolean existeRegistro()
     {
         return true;
