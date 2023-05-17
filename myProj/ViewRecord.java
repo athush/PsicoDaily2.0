@@ -46,72 +46,88 @@ public class ViewRecord implements Command{
         int numRegistros = patient.records.size();
         int altura = 70;
 
-        for (int i = 0; i < numRegistros; i++) {
-            Record record = patient.records.get(i);
-            String tituloRegistro = record.getTitle();
-            JLabel tituloLabel = new JLabel("Titulo registro: " + tituloRegistro);
-            tituloLabel.setFont(new Font("Arial", Font.BOLD, 16));
-            tituloLabel.setSize(300, 30);
-            tituloLabel.setLocation(40, altura);
-
-            String textoRegistro = record.getText();
-            JLabel textoLabel = new JLabel("Registro: " + textoRegistro);
-            textoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-            textoLabel.setSize(350, 30);
-            textoLabel.setLocation(40, altura + 20);
-
-            int idRegistro = record.getId();
-            JLabel idLabel = new JLabel("ID do Registro: " + idRegistro);
-            idLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-            idLabel.setSize(350, 30);
-            idLabel.setLocation(40, altura + 40);
-
-            // Edit Button
-            JButton editButton = new JButton("Editar");
-            editButton.setFont(new Font("Arial", Font.PLAIN, 12));
-            editButton.setSize(80, 30);
-            editButton.setLocation(380, altura + 10);
-
-            editButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    window.dispose();
-                    
-                    Command editRecord = new EditRecord(main_window, patient, record.getId());
-                    invoker.setCommand(editRecord);
-                    invoker.executeCommand();
-                }
-            });
-
-            // Delete Button
-            JButton deleteButton = new JButton("Excluir");
-            deleteButton.setFont(new Font("Arial", Font.PLAIN, 12));
-            deleteButton.setSize(80, 30);
-            deleteButton.setLocation(480, altura + 10);
-
-            deleteButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?");
-                    if (resposta == 0) {
-                        patient.records.remove(record);
+        if (patient.existeRegistro.existeRegistro())
+        {
+            for (int i = 0; i < numRegistros; i++) 
+            {
+                Record record = patient.records.get(i);
+                String tituloRegistro = record.getTitle();
+                JLabel tituloLabel = new JLabel("Titulo registro: " + tituloRegistro);
+                tituloLabel.setFont(new Font("Arial", Font.BOLD, 16));
+                tituloLabel.setSize(300, 30);
+                tituloLabel.setLocation(40, altura);
+    
+                String textoRegistro = record.getText();
+                JLabel textoLabel = new JLabel("Registro: " + textoRegistro);
+                textoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                textoLabel.setSize(350, 30);
+                textoLabel.setLocation(40, altura + 20);
+    
+                int idRegistro = record.getId();
+                JLabel idLabel = new JLabel("ID do Registro: " + idRegistro);
+                idLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+                idLabel.setSize(350, 30);
+                idLabel.setLocation(40, altura + 40);
+    
+                // Edit Button
+                JButton editButton = new JButton("Editar");
+                editButton.setFont(new Font("Arial", Font.PLAIN, 12));
+                editButton.setSize(80, 30);
+                editButton.setLocation(380, altura + 10);
+    
+                editButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
                         window.dispose();
-
-                        Command viewRecord = new ViewRecord(main_window, patient);
-                        invoker.setCommand(viewRecord);
+                        
+                        Command editRecord = new EditRecord(main_window, patient, record.getId());
+                        invoker.setCommand(editRecord);
                         invoker.executeCommand();
-
                     }
-                }
-            });
-
-            c.add(editButton);
-            c.add(deleteButton);
-            c.add(idLabel);
-            c.add(textoLabel);
-            c.add(tituloLabel);
-            altura += 70;
+                });
+    
+                // Delete Button
+                JButton deleteButton = new JButton("Excluir");
+                deleteButton.setFont(new Font("Arial", Font.PLAIN, 12));
+                deleteButton.setSize(80, 30);
+                deleteButton.setLocation(480, altura + 10);
+    
+                deleteButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?");
+                        if (resposta == 0) {
+                            patient.records.remove(record);
+                            patient.updateRegistro();
+                            
+                            window.dispose();
+    
+                            Command viewRecord = new ViewRecord(main_window, patient);
+                            invoker.setCommand(viewRecord);
+                            invoker.executeCommand();
+    
+                        }
+                    }
+                });
+    
+                c.add(editButton);
+                c.add(deleteButton);
+                c.add(idLabel);
+                c.add(textoLabel);
+                c.add(tituloLabel);
+                altura += 70;
+            }
         }
+        else
+        {
+            JLabel alertMessage = new JLabel("Não há registros.");
+            alertMessage.setFont(new Font("Arial", Font.BOLD, 16));
+            alertMessage.setSize(300, 30);
+            alertMessage.setLocation(40, altura);
+
+            c.add(alertMessage);
+        }
+
         window.setVisible(true);
     }
     

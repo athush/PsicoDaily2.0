@@ -11,6 +11,7 @@ public class Patient extends User
     PatientState vinculo;
     ConsultaState estadoConsulta;
     ArrayList<Record> records;
+    RecordState existeRegistro;
     
     public Patient(int id, String name, String email, char[] password, String cpf) throws  CPFInvalidException, EmailInvalideException, PasswordInvalidException{
         super(id, name, email, password, cpf);
@@ -18,6 +19,7 @@ public class Patient extends User
         this.records = new ArrayList<Record>();
         this.estadoConsulta = new ConsultaDesmarcada();
         this.psic_id = -1;
+        this.existeRegistro = new nRegistroState();
         this.vinculo = new PatientNaoVinculadoState();
     }
 
@@ -35,11 +37,24 @@ public class Patient extends User
     public void addRecord(Record newRecord)
     {
         records.add(newRecord);
+        updateRegistro();
     }
 
     public void editRecord(Record newRecord)
     {
         records.set(newRecord.getId() - 1, newRecord);
+    }
+
+    public void updateRegistro()
+    {
+        if (records.size() > 0)
+        {
+            this.existeRegistro = new sRegistroState();
+        }
+        else
+        {
+            this.existeRegistro = new nRegistroState();
+        }
     }
 
     public void updateVinculo()

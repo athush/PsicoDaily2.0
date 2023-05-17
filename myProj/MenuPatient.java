@@ -38,6 +38,8 @@ public class MenuPatient implements Command {
         System.out.println("Consulta: " + patient.estadoConsulta.temConsulta());
         // System.out.println("Vinculo: " + patient.vinculo.estaVinculado());
 
+        System.out.println("Tem registro: " + patient.existeRegistro.existeRegistro());
+
         Container c = window.getContentPane();
         c.setLayout(null);
 
