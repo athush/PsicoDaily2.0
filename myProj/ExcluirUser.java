@@ -15,7 +15,7 @@ public class ExcluirUser implements Command{
     public void execute(){
         int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir o perfil de " + user.name + "?");
         if (resposta == 0) {
-            db.database_user.remove(user);
+            db.delete_user(user);
         }
     }
 }

@@ -171,6 +171,7 @@ public class ConsultasWindow implements Command{
 						}  
 
 						novaConsulta.setHorario(selectedDate, horarioDataInicio, horarioDataFim, db.database_consulta);
+						patient.estadoConsulta = new ConsultaMarcada();
 						db.add_consulta(novaConsulta);
 
 						JOptionPane.showMessageDialog(null, "Consulta marcada.");

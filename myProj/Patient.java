@@ -9,6 +9,7 @@ public class Patient extends User
 {
     int psic_id;
     PatientState vinculo;
+    ConsultaState estadoConsulta;
     ArrayList<Record> records;
     RecordState existeRegistro;
     
@@ -16,8 +17,10 @@ public class Patient extends User
         super(id, name, email, password, cpf);
 
         this.records = new ArrayList<Record>();
+        this.estadoConsulta = new ConsultaDesmarcada();
         this.psic_id = -1;
         this.existeRegistro = new nRegistroState();
+        this.vinculo = new PatientNaoVinculadoState();
     }
 
     @Override

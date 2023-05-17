@@ -12,6 +12,7 @@ public class ProfileWindow implements Command{
 
     private Container c;
     private JLabel title;
+    private JButton deleteUserButton;
     private JButton returnButton;
 
     JFrame main_window;
@@ -50,7 +51,7 @@ public class ProfileWindow implements Command{
         returnButton = new JButton("Cancelar");
         returnButton.setFont(new Font("Arial", Font.PLAIN, 15));
         returnButton.setSize(100, 25);
-        returnButton.setLocation(460, 320);
+        returnButton.setLocation(280, 400);
         c.add(returnButton);
 
         returnButton.addActionListener(new ActionListener() {
@@ -65,6 +66,24 @@ public class ProfileWindow implements Command{
 
         for (User u : db.database_user) {
             ArrayList<String> resultado = u.profile();
+
+            deleteUserButton = new JButton("Excluir usuário");
+            deleteUserButton.setSize(120, 25);
+            deleteUserButton.setLocation(520, altura + 20);
+            c.add(deleteUserButton);
+
+            deleteUserButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Command deleteUser = new ExcluirUser(db, u);
+                    invoker.setCommand(deleteUser);
+                    invoker.executeCommand();
+                    window.dispose();
+                    Command profileWindow = new ProfileWindow(main_window, db);
+                    invoker.setCommand(profileWindow);
+                    invoker.executeCommand();
+                }
+            });
 
             for (String dado : resultado) {
                 JLabel inf = new JLabel(dado);

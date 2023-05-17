@@ -24,7 +24,7 @@ Todos eles deveriam receber um Record.
 
 5. State:
 - Vinculo ✅
-- Record 
+- Record ✅
 - Consulta (marcada ou não)
 
 # Entrega: 1 padrão simples e 2 complexos: utilizando herança e polimorfismo
